@@ -1,0 +1,40 @@
+Resources:
+  EventBusSnsRestaurantAccountTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: ${self:custom.constants.RESTAURANT_ACCOUNT.SNS_TOPIC}
+  EventBusSnsRestaurantAccountTopicPolicy:
+    Type: AWS::SNS::TopicPolicy
+    Properties:
+      Topics:
+        - !Ref EventBusSnsRestaurantAccountTopic
+      PolicyDocument:
+        Id: EventBusSnsRestaurantAccountTopicPolicyId
+        Version: '2012-10-17'
+        Statement:
+        - Sid: EventBusSnsRestaurantAccountTopicPolicySidSelf
+          Effect: Allow
+          Principal:
+            AWS: arn:aws:iam::${self:custom.environment.AWS_ACCOUNT_ID}:root
+          Action:
+            - SNS:GetTopicAttributes
+            - SNS:SetTopicAttributes
+            - SNS:AddPermission
+            - SNS:RemovePermission
+            - SNS:DeleteTopic
+            - SNS:Subscribe
+            - SNS:ListSubscriptionsByTopic
+            - SNS:Publish
+            - SNS:Receive
+          Resource: !Ref EventBusSnsRestaurantAccountTopic
+
+Outputs:
+  EventBusSnsRestaurantAccountTopicArn:
+    Value:
+      Ref: EventBusSnsRestaurantAccountTopic
+    Export:
+      Name: EventBusSnsRestaurantAccountTopicArn
+  EventBusSnsRestaurantAccountTopicName:
+    Value:  ${self:custom.constants.RESTAURANT_ACCOUNT.SNS_TOPIC}
+    Export:
+      Name: EventBusSnsRestaurantAccountTopicName

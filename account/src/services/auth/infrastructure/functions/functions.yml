@@ -1,0 +1,7 @@
+user-authorizer:
+  role: IamRestaurantAccountLambdaAccessRole
+  handler: src/services/auth/infrastructure/functions/http/verify/handler.handler
+  environment:
+    SNS_TOPIC_ARN: !Ref EventBusSnsRestaurantAccountTopic
+    MONGO_DATABASE_URI: ${ssm:/restaurant-account/databases/MONGO_URI}
+    MONGO_DATABASE_NAME: ${ssm:/restaurant-account/databases/MONGO_NAME}

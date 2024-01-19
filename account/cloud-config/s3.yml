@@ -1,0 +1,37 @@
+Resources:
+  S3RestaurantAccountStorage:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    Properties:
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        IgnorePublicAcls: true
+        BlockPublicPolicy: true
+        RestrictPublicBuckets: true
+      VersioningConfiguration:
+        Status: Enabled
+      CorsConfiguration:
+        CorsRules:
+          - AllowedOrigins:
+              - '*'
+            AllowedHeaders:
+              - '*'
+            AllowedMethods:
+              - GET
+              - PUT
+              - POST
+              - DELETE
+              - HEAD
+            MaxAge: 3600
+
+Outputs:
+  S3RestaurantAccountStorageName:
+    Value:
+      Ref: S3RestaurantAccountStorage
+    Export:
+      Name: S3RestaurantAccountStorageName
+  S3RestaurantAccountStorageArn:
+    Value:
+      Fn::GetAtt: [S3RestaurantAccountStorage, Arn]
+    Export:
+      Name: S3RestaurantAccountStorageArn

@@ -1,0 +1,53 @@
+app: soymichel-dev
+service: restaurant-kitchen
+
+package:
+  individually: true
+
+plugins:
+  - serverless-esbuild
+  - serverless-offline
+
+custom:
+  constants: ${file(./../env.yml):constants}
+  localConstants: ${file(./env.yml):constants}
+  environment: ${file(./../env.yml):${opt:stage}}
+  localEnvironment: ${file(./env.yml):${opt:stage}}
+
+provider:
+  name: aws
+  deploymentMethod: direct
+  runtime: nodejs18.x
+  timeout: 29
+  region: ${self:custom.constants.REGION}
+  stage: ${opt:stage}
+  endpointType: REGIONAL
+  environment:
+    APP: ${self:app}
+    SERVICE: ${self:service}
+    LAMBDA_TIMEOUT: ${self:provider.timeout}
+    PACKAGE: ${file(./package.json):name}
+    REGION: ${self:provider.region}
+    STAGE: ${opt:stage}
+    VERSION: ${file(./package.json):version}
+    EVENT_BUS_VERSION: ${self:custom.localConstants.EVENT_BUS_VERSION}
+  stackPolicy:
+    - Effect: Allow
+      Principal: '*'
+      Action:
+        - Update:*
+      Resource: '*'
+  httpApi:
+    id: ${cf:restaurant-core-${self:provider.stage}.RestaurantCoreApiGatewayV2Id}
+    name: RestaurantCoreApi
+    metrics: true
+
+functions:
+  - ${file(src/services/ping/infrastructure/functions/functions.yml)}
+
+resources:
+  - ${file(cloud-config/iamPolicies.yml)}
+  - ${file(cloud-config/iamRoles.yml)}
+  - ${file(cloud-config/eventBusSns.yml)}
+  - ${file(cloud-config/eventBusSqs.yml)}
+  - ${file(cloud-config/s3.yml)}

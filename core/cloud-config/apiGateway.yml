@@ -1,0 +1,39 @@
+Resources:
+  RestaurantCoreApiGatewayV2:
+    Type: AWS::ApiGatewayV2::Api
+    Properties:
+      Name: RestaurantCoreApi
+      ProtocolType: HTTP
+      Description: API Gateway to all microservices
+      CorsConfiguration:
+        AllowOrigins:
+          - '*'
+        AllowMethods:
+          - '*'
+
+  RestaurantCoreApiGatewayV2StageV1:
+    Type: AWS::ApiGatewayV2::Stage
+    Properties:
+      ApiId: !Ref RestaurantCoreApiGatewayV2
+      StageName: v1
+      AutoDeploy: true
+      AccessLogSettings:
+        DestinationArn:
+          Fn::GetAtt: [RestaurantCoreApiGatewayV2LogGroup, Arn]
+        Format: '{"requestId":"$context.requestId","ip":"$context.identity.sourceIp","caller":"$context.identity.caller","user":"$context.identity.user","requestTime":"$context.requestTime","httpMethod":"$context.httpMethod","resourcePath":"$context.resourcePath","status":"$context.status","protocol":"$context.protocol","responseLength":"$context.responseLength","errorMessage":"$context.error.message", "errorAuthorizer": "$context.authorizer.error", "errorIntegration": "$context.integration.error"}'
+
+  RestaurantCoreApiGatewayV2LogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Join
+        - '/'
+        - - '/aws/apiGateway'
+          - !Ref RestaurantCoreApiGatewayV2
+          - 'access-logs'
+
+Outputs:
+  RestaurantCoreApiGatewayV2Id:
+    Value:
+      Fn::GetAtt: [RestaurantCoreApiGatewayV2, ApiId]
+    Export:
+      Name: ${self:service}-RestaurantCoreApiGatewayV2-ApiId

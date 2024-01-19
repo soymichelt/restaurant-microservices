@@ -1,0 +1,19 @@
+Resources:
+  CIIAMGroup:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: RestaurantCIIAMGroup
+
+  GitHubActionCIIAMUser:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: RestaurantGitHubActionCI
+      Groups:
+        - Ref: CIIAMGroup
+
+Outputs:
+  CIIAMGroupName:
+    Value:
+      Ref: CIIAMGroup
+    Export:
+      Name: ${self:service}-CIIAMGroupName

@@ -1,0 +1,24 @@
+Resources:
+  RestaurantCoreDeploymentPolicies:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      Description: Políticas y permisos necesarios para los sistemas de CI / CD
+      Groups:
+        - Ref: CIIAMGroup
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action:
+              - cloudformation:*
+              - iam:*
+              - apigateway:*
+              - cloudwatch:*
+              - logs:*
+              - lambda:*
+              - s3:*
+              - events:*
+              - sns:*
+              - ssm:*
+              - kms:*
+            Resource: '*'

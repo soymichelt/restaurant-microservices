@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-kitchen-v0.1.0...restaurant-kitchen-v0.2.0) (2024-01-20)
+
+
+### Features
+
+* add createdAt and updatedAt fields to recipe aggregate root ([9bff225](https://github.com/soymichelt/restaurant-microservices/commit/9bff225791cdde2c050bcf262b8aa68605e58757))
+
 ## [0.1.0](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-kitchen-v0.0.1...restaurant-kitchen-v0.1.0) (2024-01-20)
 
 

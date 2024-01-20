@@ -1,0 +1,10 @@
+{
+  "bootstrap-sha": "00e6a45c2b22f87d1e452c619487e73d07ac9d18",
+  "packages": {
+    "core": {},
+    "account": {},
+    "kitchen": {}
+  },
+  "separate-pull-requests": true,
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json"
+}

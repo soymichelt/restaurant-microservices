@@ -1,0 +1,52 @@
+name: Restaurant Core - Deploy generic infrastructure to AWS
+
+on:
+  push:
+    paths:
+      - 'core/**'
+    branches:
+      - '!release-please**'
+    tags:
+      - 'core-v**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node 20
+        working-directory: ./core
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install microservice dependencies
+        working-directory: ./core
+        run: npm install
+
+      - name: Run Linter
+        working-directory: ./core
+        run: npm run lint
+
+      - name: Run Test's
+        working-directory: ./core
+        run: npm run test
+
+      - name: Run Build
+        working-directory: ./core
+        run: npm run build
+
+      - name: Install Serverless Framework
+        working-directory: ./core
+        run: npm install -g serverless
+
+      - name: Run Deploy to AWS
+        working-directory: ./core
+        run: npm run deploy
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}

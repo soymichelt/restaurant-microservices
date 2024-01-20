@@ -2,9 +2,7 @@ import 'reflect-metadata';
 
 import { EventBus } from '@shared/domain/events/eventBus';
 import { Logger } from '@shared/domain/loggers/logger';
-import { EncriptionService } from '@shared/domain/services/encriptionService';
 import { KeyStoreService } from '@shared/domain/services/keyStoreService';
-import { MailingService } from '@shared/domain/services/mailingService';
 import { AuthorizerRequestParserController } from '@shared/infrastructure/controllers/authorizerRequestParserController';
 import { HttpRequestParserController } from '@shared/infrastructure/controllers/httpRequestParserController';
 import { ManagerRequestParsersController } from '@shared/infrastructure/controllers/managerRequestParsersController';
@@ -13,9 +11,7 @@ import { SnsRequestParserController } from '@shared/infrastructure/controllers/s
 import { EventBusSns } from '@shared/infrastructure/events/eventBusSns';
 import { WinstonLogger } from '@shared/infrastructure/loggers/winston/winstonLogger';
 import { MongoClientFactory } from '@shared/infrastructure/persistence/mongodb/mongoClientFactory';
-import { CryptoEncriptionService } from '@shared/infrastructure/services/encription/cryptoEncriptionService';
 import { SsmKeyStoreService } from '@shared/infrastructure/services/keyStore/ssmKeyStoreService';
-import { SesMailingService } from '@shared/infrastructure/services/mailing/sesMailingService';
 import { container } from 'tsyringe';
 
 container
@@ -55,24 +51,6 @@ if (process.env.MONGO_DATABASE_URI && process.env.MONGO_DATABASE_NAME) {
     useValue: MongoClientFactory.build({
       uri: process.env.MONGO_DATABASE_URI,
       databaseName: process.env.MONGO_DATABASE_NAME,
-    }),
-  });
-}
-
-if (process.env.CRYPTO_SECRET_KEY && process.env.CRYPTO_SECRET_IV) {
-  container.register<EncriptionService>('EncriptionService', {
-    useValue: new CryptoEncriptionService({
-      secretKey: String(process.env.CRYPTO_SECRET_KEY),
-      secretIV: String(process.env.CRYPTO_SECRET_IV),
-    }),
-  });
-}
-
-if (process.env.SES_EMAIL_FROM) {
-  container.register<MailingService>('MailingService', {
-    useValue: new SesMailingService({
-      awsRegion: process.env.REGION,
-      emailFrom: process.env.SES_EMAIL_FROM,
     }),
   });
 }

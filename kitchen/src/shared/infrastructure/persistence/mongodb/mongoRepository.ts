@@ -1,6 +1,7 @@
 import { AggregateRoot } from '@shared/domain/aggregateRoot';
 import { Id } from '@shared/domain/valueObjects/id';
 import { MongoClientFactory } from '@shared/infrastructure/persistence/mongodb/mongoClientFactory';
+import { MongoDocument } from '@shared/infrastructure/persistence/mongodb/mongoDocumentDefinition';
 import { Collection } from 'mongodb';
 import { container } from 'tsyringe';
 
@@ -40,9 +41,9 @@ export class MongoRepository<T extends AggregateRoot> {
     await collection.deleteOne({ _id: id.value });
   }
 
-  protected async collection(name?: string): Promise<Collection> {
+  protected async collection(name?: string): Promise<Collection<MongoDocument>> {
     const db = await this.factory.connect();
-    const collection = db.collection(name ?? this.collectionName);
+    const collection = db.collection<MongoDocument>(name ?? this.collectionName);
     return collection;
   }
 }

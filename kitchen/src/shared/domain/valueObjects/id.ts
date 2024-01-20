@@ -1,28 +1,24 @@
-import { ObjectId } from 'mongodb';
+import { IdInvalidException } from '@shared/domain/exceptions/idInvalidException';
+import { v4, validate } from 'uuid';
 
 export class Id {
-  readonly value: ObjectId;
+  readonly value: string;
 
-  protected constructor(value: ObjectId) {
+  protected constructor(value: string) {
+    if (!validate(value)) {
+      throw new IdInvalidException(value);
+    }
+
     this.value = value;
   }
 
-  public static build(value: ObjectId): Id {
+  public static build(value: string): Id {
     return new Id(value);
   }
 
-  public static fromString(value: string): Id {
-    if (!ObjectId.isValid(value)) {
-      throw new Error();
-    }
-
-    const objectId = new ObjectId(value);
-    return new Id(objectId);
-  }
-
   public static newId(): Id {
-    const objectId = new ObjectId();
-    return new Id(objectId);
+    const generatedId = v4();
+    return new Id(generatedId);
   }
 
   public toString(): string {

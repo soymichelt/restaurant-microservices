@@ -1,6 +1,6 @@
 {
   "name": "restaurant-core",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Restaurant core microservice to deploy generic infrastructure",
   "scripts": {
     "lint": "eslint --color ./src/**/*.ts && tsc --noEmit",

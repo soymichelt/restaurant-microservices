@@ -1,6 +1,5 @@
 name: microservice-release
 author: SoymichelDev
-description: Release para el versionamiento independiente de los microservicios.
 
 on:
   push:

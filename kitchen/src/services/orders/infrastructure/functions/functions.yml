@@ -1,0 +1,11 @@
+order-create:
+  role: IamRestaurantKitchenLambdaAccessRole
+  handler: src/services/orders/infrastructure/functions/http/create/handler.handler
+  environment:
+    MONGO_DATABASE_URI: ${ssm:/restaurant-kitchen/databases/MONGO_URI}
+    MONGO_DATABASE_NAME: ${ssm:/restaurant-kitchen/databases/MONGO_NAME}
+    SQS_URL: !Ref EventBusSqsRestaurantKitchenQueue
+  events:
+    - httpApi:
+        method: POST
+        path: /kitchen/orders

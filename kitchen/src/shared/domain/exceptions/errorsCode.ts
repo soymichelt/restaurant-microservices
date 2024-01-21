@@ -11,4 +11,6 @@ export const ERROR_CODES = {
   // USR-200*: Users module error codes
   UserEmailAlreadyExistException: 'USR-1001',
   UserNameAlreadyExistException: 'USR-1002',
+  // RCP-300*: Recipes module error codes
+  RecipeNotFoundException: 'RCP-3001',
 };

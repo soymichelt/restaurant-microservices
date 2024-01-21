@@ -1,6 +1,6 @@
 import { Recipe } from '@services/recipes/domain/recipe';
 import { RecipeRepository } from '@services/recipes/domain/repositories/recipeRepository';
-import { RecipeId } from '@services/recipes/domain/valueObjects/recipeId';
+import { RecipeId } from '@shared/domain/valueObjects/recipeId';
 import { MongoRepository } from '@shared/infrastructure/persistence/mongodb/mongoRepository';
 import { injectable } from 'tsyringe';
 
@@ -23,6 +23,14 @@ export class MongoRecipeRepository extends MongoRepository<Recipe> implements Re
   public async find(recipeId: RecipeId): Promise<Recipe> {
     const collection = await this.collection();
     const document = await collection.findOne({ _id: recipeId.value });
+    if (!document) return;
+
+    return this.mapToRecipe(document);
+  }
+
+  public async findRand(): Promise<Recipe> {
+    const collection = await this.collection();
+    const document = await collection.findOne({ $expr: { $lt: [0.5, { $rand: {} }] } });
     if (!document) return;
 
     return this.mapToRecipe(document);

@@ -9,6 +9,7 @@ import { ManagerRequestParsersController } from '@shared/infrastructure/controll
 import { RequestParserController } from '@shared/infrastructure/controllers/requestParserController';
 import { SnsRequestParserController } from '@shared/infrastructure/controllers/snsRequestParserController';
 import { EventBusSns } from '@shared/infrastructure/events/eventBusSns';
+import { EventBusSqs } from '@shared/infrastructure/events/eventBusSqs';
 import { WinstonLogger } from '@shared/infrastructure/loggers/winston/winstonLogger';
 import { MongoClientFactory } from '@shared/infrastructure/persistence/mongodb/mongoClientFactory';
 import { SsmKeyStoreService } from '@shared/infrastructure/services/keyStore/ssmKeyStoreService';
@@ -42,6 +43,17 @@ if (process.env.SNS_TOPIC_ARN) {
       version: process.env.EVENT_BUS_VERSION,
       awsRegion: process.env.REGION,
       topicArn: process.env.SNS_TOPIC_ARN,
+    }),
+  });
+}
+
+if (process.env.SQS_URL) {
+  container.register<EventBus>('EventBus', {
+    useValue: new EventBusSqs({
+      serviceName: `${process.env.APP}.${process.env.SERVICE}`,
+      version: process.env.EVENT_BUS_VERSION,
+      awsRegion: process.env.REGION,
+      queueUrl: process.env.SQS_URL,
     }),
   });
 }

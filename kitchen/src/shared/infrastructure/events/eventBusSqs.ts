@@ -40,6 +40,7 @@ export class EventBusSqs implements EventBus {
 
   private async sendSqsMessage(event: DomainEvent | IntegrationEvent): Promise<void> {
     const messageParams = {
+      MessageGroupId: event.aggregateId,
       QueueUrl: this.queueUrl,
       DelaySeconds: this.delaySeconds,
       MessageAttributes: {

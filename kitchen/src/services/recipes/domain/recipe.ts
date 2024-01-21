@@ -1,9 +1,9 @@
 import { RecipeDescription } from '@services/recipes/domain/valueObjects/recipeDescription';
-import { RecipeId } from '@services/recipes/domain/valueObjects/recipeId';
 import { RecipeName } from '@services/recipes/domain/valueObjects/recipeName';
 import { RecipePreparationMethod } from '@services/recipes/domain/valueObjects/recipePreparationMethod';
 import { AggregateRoot } from '@shared/domain/aggregateRoot';
 import { DateValueObject } from '@shared/domain/valueObjects/dateValueObject';
+import { RecipeId } from '@shared/domain/valueObjects/recipeId';
 
 export type RecipeProps = {
   recipeId: RecipeId;

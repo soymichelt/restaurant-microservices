@@ -1,8 +1,8 @@
 import { Recipe } from '@services/recipes/domain/recipe';
 import { RecipeDescription } from '@services/recipes/domain/valueObjects/recipeDescription';
-import { RecipeId } from '@services/recipes/domain/valueObjects/recipeId';
 import { RecipeName } from '@services/recipes/domain/valueObjects/recipeName';
 import { RecipePreparationMethod } from '@services/recipes/domain/valueObjects/recipePreparationMethod';
+import { RecipeId } from '@shared/domain/valueObjects/recipeId';
 
 describe('Tests Recipe aggregate root', () => {
   test('Create recipe instance object', () => {

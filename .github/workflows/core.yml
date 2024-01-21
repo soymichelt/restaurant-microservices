@@ -7,7 +7,7 @@ on:
     branches:
       - '!release-please**'
     tags:
-      - 'core-v**'
+      - 'restaurant-core-v**'
 
 jobs:
   deploy:

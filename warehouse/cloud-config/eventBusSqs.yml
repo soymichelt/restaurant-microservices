@@ -1,0 +1,25 @@
+Resources:
+  EventBusSqsWarehouseQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      ContentBasedDeduplication: true
+      ReceiveMessageWaitTimeSeconds: 1
+      DelaySeconds: 0
+      VisibilityTimeout: 60
+      FifoQueue: true
+  EventBusSqsWarehouseQueuePolicy:
+    Type: AWS::SQS::QueuePolicy
+    Properties:
+      Queues:
+        - !Ref EventBusSqsWarehouseQueue
+      PolicyDocument:
+        Id: EventBusSqsWarehouseQueuePolicyId
+        Version: '2012-10-17'
+        Statement:
+        - Sid: EventBusSqsWarehouseQueuePolicySidSelf
+          Effect: Allow
+          Principal:
+            AWS: arn:aws:iam::${self:custom.environment.AWS_ACCOUNT_ID}:root
+          Action:
+            - SQS:SendMessage
+          Resource: !Ref EventBusSqsWarehouseQueue

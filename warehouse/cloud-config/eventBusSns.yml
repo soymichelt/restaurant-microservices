@@ -1,0 +1,40 @@
+Resources:
+  EventBusSnsWarehouseTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: ${self:custom.constants.WAREHOUSE.SNS_TOPIC}
+  EventBusSnsWarehouseTopicPolicy:
+    Type: AWS::SNS::TopicPolicy
+    Properties:
+      Topics:
+        - !Ref EventBusSnsWarehouseTopic
+      PolicyDocument:
+        Id: EventBusSnsWarehouseTopicPolicyId
+        Version: '2012-10-17'
+        Statement:
+        - Sid: EventBusSnsWarehouseTopicPolicySidSelf
+          Effect: Allow
+          Principal:
+            AWS: arn:aws:iam::${self:custom.environment.AWS_ACCOUNT_ID}:root
+          Action:
+            - SNS:GetTopicAttributes
+            - SNS:SetTopicAttributes
+            - SNS:AddPermission
+            - SNS:RemovePermission
+            - SNS:DeleteTopic
+            - SNS:Subscribe
+            - SNS:ListSubscriptionsByTopic
+            - SNS:Publish
+            - SNS:Receive
+          Resource: !Ref EventBusSnsWarehouseTopic
+
+Outputs:
+  EventBusSnsWarehouseTopicArn:
+    Value:
+      Ref: EventBusSnsWarehouseTopic
+    Export:
+      Name: EventBusSnsWarehouseTopicArn
+  EventBusSnsWarehouseTopicName:
+    Value:  ${self:custom.constants.WAREHOUSE.SNS_TOPIC}
+    Export:
+      Name: EventBusSnsWarehouseTopicName

@@ -12,9 +12,11 @@ export class MongoRecipeRepository extends MongoRepository<Recipe> implements Re
     super({ collectionName: RECIPE_COLLECTION });
   }
 
-  public async all(): Promise<Recipe[]> {
+  public async all(recipeIds?: RecipeId[]): Promise<Recipe[]> {
     const collection = await this.collection();
-    const documents = await collection.find({}).toArray();
+    const filter = !recipeIds ? {} : { _id: { $in: recipeIds.map((recipeId) => recipeId.value) } };
+
+    const documents = await collection.find(filter).toArray();
     if (!documents || !documents.length) return [];
 
     return documents.map((document) => this.mapToRecipe(document));

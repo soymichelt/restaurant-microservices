@@ -21,6 +21,12 @@ export class Id {
     return new Id(generatedId);
   }
 
+  public equals(other: Id): boolean {
+    if (!other) return false;
+
+    return this.value === other.value;
+  }
+
   public toString(): string {
     return this.value?.toString();
   }

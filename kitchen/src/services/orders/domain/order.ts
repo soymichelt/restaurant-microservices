@@ -43,6 +43,10 @@ export class Order extends AggregateRoot {
     return this._orderId;
   }
 
+  public get recipeId(): RecipeId {
+    return this._recipeId;
+  }
+
   public static build(props: OrderProps): Order {
     return new Order(props);
   }

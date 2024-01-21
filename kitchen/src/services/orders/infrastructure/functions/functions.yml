@@ -1,3 +1,14 @@
+order-get-all:
+  role: IamRestaurantKitchenLambdaAccessRole
+  handler: src/services/orders/infrastructure/functions/http/getAll/handler.handler
+  environment:
+    MONGO_DATABASE_URI: ${ssm:/restaurant-kitchen/databases/MONGO_URI}
+    MONGO_DATABASE_NAME: ${ssm:/restaurant-kitchen/databases/MONGO_NAME}
+  events:
+    - httpApi:
+        method: GET
+        path: /kitchen/orders
+
 order-create:
   role: IamRestaurantKitchenLambdaAccessRole
   handler: src/services/orders/infrastructure/functions/http/create/handler.handler

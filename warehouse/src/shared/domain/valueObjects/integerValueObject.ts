@@ -1,3 +1,5 @@
+import { IntegerInvalidException } from '@shared/domain/exceptions/integerInvalidException';
+
 export class IntegerValueObject {
   readonly value: number;
 
@@ -25,7 +27,7 @@ export class IntegerValueObject {
 
   private guardIfInteger(value: number): void {
     if (typeof value !== 'number' || !Number.isInteger(value)) {
-      throw new Error();
+      throw new IntegerInvalidException(value);
     }
   }
 }

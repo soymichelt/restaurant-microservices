@@ -8,6 +8,7 @@ export const ERROR_CODES = {
   DecryptUnknownException: 'SHA-1006',
   UnauthorizedException: 'SHA-1006',
   IdInvalidException: 'SHA-1007',
+  IntegerInvalidException: 'SHA-1008',
   // WRH-200*: Warehouse inventory module error codes
   IngredientStockInvalidException: 'WRH-2001',
 };

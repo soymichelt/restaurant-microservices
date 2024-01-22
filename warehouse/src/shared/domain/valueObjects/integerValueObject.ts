@@ -15,6 +15,10 @@ export class IntegerValueObject {
     return new IntegerValueObject(valueParsed);
   }
 
+  public static zero(): IntegerValueObject {
+    return this.build(0);
+  }
+
   public equals(other: IntegerValueObject): boolean {
     return other.value === this.value;
   }

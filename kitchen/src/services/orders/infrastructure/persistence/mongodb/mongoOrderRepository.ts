@@ -22,6 +22,14 @@ export class MongoOrderRepository extends MongoRepository<Order> implements Orde
     return documents.map((document) => this.mapToOrder(document));
   }
 
+  public async find(orderId: OrderId): Promise<Order> {
+    const collection = await this.collection();
+    const document = await collection.findOne({ _id: orderId.value });
+    if (!document) return;
+
+    return this.mapToOrder(document);
+  }
+
   public async update(order: Order): Promise<void> {
     await this.persist(order.orderId, order);
   }

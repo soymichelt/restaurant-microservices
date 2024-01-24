@@ -1,4 +1,5 @@
 import { OrderCreatedEvent } from '@services/orders/domain/events/orderCreatedEvent';
+import { OrderStateInvalidException } from '@services/orders/domain/exceptions/orderStateInvalidException';
 import { OrderId } from '@services/orders/domain/valueObjects/orderId';
 import { OrderState } from '@services/orders/domain/valueObjects/orderState';
 import { AggregateRoot } from '@shared/domain/aggregateRoot';
@@ -67,6 +68,25 @@ export class Order extends AggregateRoot {
       createdAt: DateValueObject.fromString(props.createdAt),
       updatedAt: DateValueObject.fromString(props.updatedAt),
     });
+  }
+
+  public markAsInProgress(): void {
+    this.updatedAt = DateValueObject.now();
+    this._state = OrderState.inProgress();
+  }
+
+  public markAsDone(): void {
+    if (this._state.isTodo() || this._state.isDone()) {
+      throw new OrderStateInvalidException(this._orderId, this._state);
+    }
+
+    this.updatedAt = DateValueObject.now();
+    this._state = OrderState.done();
+  }
+
+  public requestOrderAgain(): void {
+    const event = OrderCreatedEvent.build(this);
+    this.pushEvent(event);
   }
 
   public toPrimitives(): OrderPrimitives {

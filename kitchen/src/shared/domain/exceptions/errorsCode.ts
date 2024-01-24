@@ -8,9 +8,9 @@ export const ERROR_CODES = {
   DecryptUnknownException: 'SHA-1006',
   UnauthorizedException: 'SHA-1006',
   IdInvalidException: 'SHA-1007',
-  // USR-200*: Users module error codes
-  UserEmailAlreadyExistException: 'USR-1001',
-  UserNameAlreadyExistException: 'USR-1002',
+  // ORD-200*: Users module error codes
+  OrderNotFoundException: 'ORD-2001',
+  OrderStateInvalidException: 'ORD-2002',
   // RCP-300*: Recipes module error codes
   RecipeNotFoundException: 'RCP-3001',
 };

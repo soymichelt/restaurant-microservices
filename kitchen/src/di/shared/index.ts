@@ -8,17 +8,20 @@ import { HttpRequestParserController } from '@shared/infrastructure/controllers/
 import { ManagerRequestParsersController } from '@shared/infrastructure/controllers/managerRequestParsersController';
 import { RequestParserController } from '@shared/infrastructure/controllers/requestParserController';
 import { SnsRequestParserController } from '@shared/infrastructure/controllers/snsRequestParserController';
+import { SqsRequestParserController } from '@shared/infrastructure/controllers/sqsRequestParserController';
 import { EventBusSns } from '@shared/infrastructure/events/eventBusSns';
 import { EventBusSqs } from '@shared/infrastructure/events/eventBusSqs';
 import { WinstonLogger } from '@shared/infrastructure/loggers/winston/winstonLogger';
 import { MongoClientFactory } from '@shared/infrastructure/persistence/mongodb/mongoClientFactory';
 import { SsmKeyStoreService } from '@shared/infrastructure/services/keyStore/ssmKeyStoreService';
+import { LambdaInvokeService } from '@shared/infrastructure/services/lambda/lambdaInvokeService';
 import { container } from 'tsyringe';
 
 container
   .register<RequestParserController>('RequestParserController', HttpRequestParserController)
   .register<RequestParserController>('RequestParserController', AuthorizerRequestParserController)
   .register<RequestParserController>('RequestParserController', SnsRequestParserController)
+  .register<RequestParserController>('RequestParserController', SqsRequestParserController)
   .register<ManagerRequestParsersController>('ManagerRequestParsersController', ManagerRequestParsersController)
   .register<Logger>('Logger', {
     useValue: new WinstonLogger({
@@ -34,7 +37,8 @@ container
     useValue: new SsmKeyStoreService({
       awsRegion: process.env.REGION,
     }),
-  });
+  })
+  .register<LambdaInvokeService>('LambdaInvokeService', LambdaInvokeService);
 
 if (process.env.SNS_TOPIC_ARN) {
   container.register<EventBus>('EventBus', {

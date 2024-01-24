@@ -28,4 +28,16 @@ export class OrderState extends EnumValueObject<OrderStateEnum> {
   public static done(): OrderState {
     return this.build(OrderStateEnum.done);
   }
+
+  public isTodo(): boolean {
+    return this.value === OrderStateEnum.done;
+  }
+
+  public isInProgress(): boolean {
+    return this.value === OrderStateEnum.inProgress;
+  }
+
+  public isDone(): boolean {
+    return this.value === OrderStateEnum.done;
+  }
 }

@@ -20,6 +20,11 @@ Resources:
             Statement:
               - Effect: Allow
                 Action:
+                  - lambda:InvokeFunction
+                Resource:
+                  - ${self:custom.environment.RESTAURANT_WAREHOUSE.LAMBDA_ORDER_INGREDIENTS_STOCK}
+              - Effect: Allow
+                Action:
                   - SNS:Publish
                 Resource:
                   Ref: EventBusSnsRestaurantKitchenTopic
@@ -41,5 +46,8 @@ Resources:
               - Effect: 'Allow'
                 Action:
                   - sqs:SendMessage
+                  - sqs:ReceiveMessage
+                  - sqs:DeleteMessage
+                  - sqs:GetQueueAttributes
                 Resource:
                   - Fn::GetAtt: [EventBusSqsRestaurantKitchenQueue, Arn]

@@ -6,6 +6,8 @@ Resources:
       ProtocolType: HTTP
       Description: API Gateway to all microservices
       CorsConfiguration:
+        AllowHeaders:
+          - '*'
         AllowOrigins:
           - '*'
         AllowMethods:

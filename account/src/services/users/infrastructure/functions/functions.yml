@@ -1,6 +1,6 @@
-user-create:
+user-signup:
   role: IamRestaurantAccountLambdaAccessRole
-  handler: src/services/users/infrastructure/functions/http/create/handler.handler
+  handler: src/services/users/infrastructure/functions/http/signup/handler.handler
   environment:
     SNS_TOPIC_ARN: !Ref EventBusSnsRestaurantAccountTopic
     MONGO_DATABASE_URI: ${ssm:/restaurant-account/databases/MONGO_URI}

@@ -6,6 +6,7 @@ import { EncriptionService } from '@shared/domain/services/encriptionService';
 import { KeyStoreService } from '@shared/domain/services/keyStoreService';
 import { MailingService } from '@shared/domain/services/mailingService';
 import { SmsService } from '@shared/domain/services/smsService';
+import { UserTokenService } from '@shared/domain/services/userTokenService';
 import { AuthorizerRequestParserController } from '@shared/infrastructure/controllers/authorizerRequestParserController';
 import { HttpRequestParserController } from '@shared/infrastructure/controllers/httpRequestParserController';
 import { ManagerRequestParsersController } from '@shared/infrastructure/controllers/managerRequestParsersController';
@@ -15,6 +16,7 @@ import { EventBusSns } from '@shared/infrastructure/events/eventBusSns';
 import { WinstonLogger } from '@shared/infrastructure/loggers/winston/winstonLogger';
 import { MongoClientFactory } from '@shared/infrastructure/persistence/mongodb/mongoClientFactory';
 import { CryptoEncriptionService } from '@shared/infrastructure/services/encription/cryptoEncriptionService';
+import { JwtUserTokenService } from '@shared/infrastructure/services/jwt/jwtUserTokenService';
 import { SsmKeyStoreService } from '@shared/infrastructure/services/keyStore/ssmKeyStoreService';
 import { SesMailingService } from '@shared/infrastructure/services/mailing/sesMailingService';
 import { SnsSmsService } from '@shared/infrastructure/services/sms/SnsSmsService';
@@ -84,6 +86,14 @@ if (process.env.SMS_SENDER) {
     useValue: new SnsSmsService({
       awsRegion: process.env.REGION,
       sender: process.env.SMS_SENDER,
+    }),
+  });
+}
+
+if (process.env.JWT_PRIVATE_KEY) {
+  container.register<UserTokenService>('UserTokenService', {
+    useValue: new JwtUserTokenService({
+      privateKey: process.env.JWT_PRIVATE_KEY?.toString().trim(),
     }),
   });
 }

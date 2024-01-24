@@ -49,6 +49,7 @@ export class MongoRecipeRepository extends MongoRepository<Recipe> implements Re
       name: document.name,
       description: document.description,
       preparationMethod: document.preparationMethod,
+      ingredients: document.ingredients,
       createdAt: document.createdAt,
       updatedAt: document.updatedAt,
     });

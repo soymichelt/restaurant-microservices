@@ -1,6 +1,6 @@
 {
   "name": "restaurant-kitchen",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Restaurant kitchen microservices - Manage kitchen orders",
   "scripts": {
     "lint": "eslint --color ./src/**/*.ts && tsc --noEmit",

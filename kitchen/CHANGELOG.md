@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-kitchen-v0.4.0...restaurant-kitchen-v0.5.0) (2024-01-24)
+
+
+### Features
+
+* add ingredient entity to recipe aggregate root ([ab7c957](https://github.com/soymichelt/restaurant-microservices/commit/ab7c9578af4640a9898c23e4a78190b9aa8ff3bf))
+
 ## [0.4.0](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-kitchen-v0.3.0...restaurant-kitchen-v0.4.0) (2024-01-21)
 
 

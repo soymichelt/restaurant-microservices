@@ -44,6 +44,14 @@ export class Ingredient extends AggregateRoot {
     return this._ingredientId;
   }
 
+  public get name(): IngredientName {
+    return this._name;
+  }
+
+  public get stock(): IngredientStock {
+    return this._stock;
+  }
+
   public static build(props: IngredientProps): Ingredient {
     return new Ingredient(props);
   }

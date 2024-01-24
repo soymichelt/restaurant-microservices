@@ -1,6 +1,7 @@
 ingredients-get-all:
   role: IamWarehouseLambdaAccessRole
   handler: src/services/ingredients/infrastructure/functions/http/getAll/handler.handler
+  maximumRetryAttempts: 0
   environment:
     MONGO_DATABASE_URI: ${ssm:/restaurant-warehouse/databases/MONGO_URI}
     MONGO_DATABASE_NAME: ${ssm:/restaurant-warehouse/databases/MONGO_NAME}
@@ -8,3 +9,25 @@ ingredients-get-all:
     - httpApi:
         method: GET
         path: /warehouse/ingredients
+
+ingredients-order-stock:
+  role: IamWarehouseLambdaAccessRole
+  handler: src/services/ingredients/infrastructure/functions/http/orderStock/handler.handler
+  maximumRetryAttempts: 0
+  environment:
+    MONGO_DATABASE_URI: ${ssm:/restaurant-warehouse/databases/MONGO_URI}
+    MONGO_DATABASE_NAME: ${ssm:/restaurant-warehouse/databases/MONGO_NAME}
+    SNS_TOPIC_ARN: !Ref EventBusSnsWarehouseTopic
+  events:
+    - httpApi:
+        method: POST
+        path: /warehouse/ingredients/stock
+
+ingredients-order-stock-invoke:
+  role: IamWarehouseLambdaAccessRole
+  handler: src/services/ingredients/infrastructure/functions/http/orderStock/handler.handler
+  maximumRetryAttempts: 0
+  environment:
+    MONGO_DATABASE_URI: ${ssm:/restaurant-warehouse/databases/MONGO_URI}
+    MONGO_DATABASE_NAME: ${ssm:/restaurant-warehouse/databases/MONGO_NAME}
+    SNS_TOPIC_ARN: !Ref EventBusSnsWarehouseTopic

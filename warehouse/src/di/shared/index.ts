@@ -5,6 +5,7 @@ import { Logger } from '@shared/domain/loggers/logger';
 import { KeyStoreService } from '@shared/domain/services/keyStoreService';
 import { AuthorizerRequestParserController } from '@shared/infrastructure/controllers/authorizerRequestParserController';
 import { HttpRequestParserController } from '@shared/infrastructure/controllers/httpRequestParserController';
+import { InvokeRequestParserController } from '@shared/infrastructure/controllers/invokeRequestParserController';
 import { ManagerRequestParsersController } from '@shared/infrastructure/controllers/managerRequestParsersController';
 import { RequestParserController } from '@shared/infrastructure/controllers/requestParserController';
 import { SnsRequestParserController } from '@shared/infrastructure/controllers/snsRequestParserController';
@@ -19,6 +20,7 @@ container
   .register<RequestParserController>('RequestParserController', HttpRequestParserController)
   .register<RequestParserController>('RequestParserController', AuthorizerRequestParserController)
   .register<RequestParserController>('RequestParserController', SnsRequestParserController)
+  .register<RequestParserController>('RequestParserController', InvokeRequestParserController)
   .register<ManagerRequestParsersController>('ManagerRequestParsersController', ManagerRequestParsersController)
   .register<Logger>('Logger', {
     useValue: new WinstonLogger({

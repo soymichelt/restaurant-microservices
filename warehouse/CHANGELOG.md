@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/soymichelt/restaurant-microservices/compare/warehouse-v0.1.0...warehouse-v0.2.0) (2024-01-24)
+
+
+### Features
+
+* add order ingredients stock use case ([d2bf572](https://github.com/soymichelt/restaurant-microservices/commit/d2bf57235ca703cc0823f54625237b7ab8bcdb97))
+
 ## [0.1.0](https://github.com/soymichelt/restaurant-microservices/compare/warehouse-v0.0.1...warehouse-v0.1.0) (2024-01-22)
 
 

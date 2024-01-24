@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/soymichelt/restaurant-microservices/compare/warehouse-v0.3.0...warehouse-v0.4.0) (2024-01-24)
+
+
+### Features
+
+* add register output movement use case ([512715f](https://github.com/soymichelt/restaurant-microservices/commit/512715fd44fd6594b5da179962ef2ee293d2ae8b))
+
 ## [0.3.0](https://github.com/soymichelt/restaurant-microservices/compare/warehouse-v0.2.0...warehouse-v0.3.0) (2024-01-24)
 
 

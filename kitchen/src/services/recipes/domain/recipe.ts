@@ -1,3 +1,4 @@
+import { RecipeIngredient, RecipeIngredientPrimitives } from '@services/recipes/domain/entities/recipeIngredient';
 import { RecipeDescription } from '@services/recipes/domain/valueObjects/recipeDescription';
 import { RecipeName } from '@services/recipes/domain/valueObjects/recipeName';
 import { RecipePreparationMethod } from '@services/recipes/domain/valueObjects/recipePreparationMethod';
@@ -10,6 +11,7 @@ export type RecipeProps = {
   name: RecipeName;
   description?: RecipeDescription;
   preparationMethod?: RecipePreparationMethod;
+  ingredients?: RecipeIngredient[];
 
   createdAt?: DateValueObject;
   updatedAt?: DateValueObject;
@@ -20,6 +22,7 @@ export type RecipePrimitives = {
   name: string;
   description?: string;
   preparationMethod?: string;
+  ingredients: RecipeIngredientPrimitives[];
 
   createdAt: string;
   updatedAt: string;
@@ -30,6 +33,7 @@ export class Recipe extends AggregateRoot {
   private _name: RecipeName;
   private _description: RecipeDescription;
   private _preparationMethod: RecipePreparationMethod;
+  private _ingredients: RecipeIngredient[];
 
   private constructor(props: RecipeProps) {
     super();
@@ -38,6 +42,7 @@ export class Recipe extends AggregateRoot {
     this._name = props.name;
     this._description = props.description;
     this._preparationMethod = props.preparationMethod;
+    this._ingredients = props.ingredients || [];
 
     this.createdAt = props.createdAt ?? DateValueObject.now();
     this.updatedAt = props.updatedAt ?? DateValueObject.now();
@@ -45,6 +50,10 @@ export class Recipe extends AggregateRoot {
 
   public get recipeId(): RecipeId {
     return this._recipeId;
+  }
+
+  public get ingredients(): RecipeIngredient[] {
+    return this._ingredients;
   }
 
   public static build(props: RecipeProps): Recipe {
@@ -57,6 +66,7 @@ export class Recipe extends AggregateRoot {
       name: RecipeName.build(props.name),
       description: props.description ? RecipeDescription.build(props.description) : undefined,
       preparationMethod: props.preparationMethod ? RecipePreparationMethod.build(props.preparationMethod) : undefined,
+      ingredients: props.ingredients.map((ingredient) => RecipeIngredient.fromPrimitives(ingredient)),
 
       createdAt: DateValueObject.fromString(props.createdAt),
       updatedAt: DateValueObject.fromString(props.updatedAt),
@@ -69,6 +79,7 @@ export class Recipe extends AggregateRoot {
       name: this._name.value,
       description: this._description?.value,
       preparationMethod: this._preparationMethod?.value,
+      ingredients: this._ingredients.map((ingredient) => ingredient.toPrimitives()),
 
       createdAt: this.createdAt.toString(),
       updatedAt: this.updatedAt.toString(),

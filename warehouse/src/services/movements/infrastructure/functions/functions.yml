@@ -1,0 +1,41 @@
+movements-get-all:
+  role: IamWarehouseLambdaAccessRole
+  handler: src/services/movements/infrastructure/functions/http/getAll/handler.handler
+  maximumRetryAttempts: 0
+  environment:
+    MONGO_DATABASE_URI: ${ssm:/restaurant-warehouse/databases/MONGO_URI}
+    MONGO_DATABASE_NAME: ${ssm:/restaurant-warehouse/databases/MONGO_NAME}
+  events:
+    - httpApi:
+        method: GET
+        path: /warehouse/movements/{ingredientId}
+
+movements-register-entry-sns:
+  role: IamWarehouseLambdaAccessRole
+  handler: src/services/movements/infrastructure/functions/sqs/registerEntry/handler.handler
+  maximumRetryAttempts: 0
+  environment:
+    MONGO_DATABASE_URI: ${ssm:/restaurant-warehouse/databases/MONGO_URI}
+    MONGO_DATABASE_NAME: ${ssm:/restaurant-warehouse/databases/MONGO_NAME}
+  events:
+    - sns:
+        arn: !Ref EventBusSnsWarehouseTopic
+        topicName: ${self:custom.constants.WAREHOUSE.SNS_TOPIC}
+        filterPolicy:
+          event_type:
+            - 'soymichel-dev.restaurant-warehouse.v1.ingredient.incremented.stock'
+
+movements-register-output-sns:
+  role: IamWarehouseLambdaAccessRole
+  handler: src/services/movements/infrastructure/functions/sqs/registerOutput/handler.handler
+  maximumRetryAttempts: 0
+  environment:
+    MONGO_DATABASE_URI: ${ssm:/restaurant-warehouse/databases/MONGO_URI}
+    MONGO_DATABASE_NAME: ${ssm:/restaurant-warehouse/databases/MONGO_NAME}
+  events:
+    - sns:
+        arn: !Ref EventBusSnsWarehouseTopic
+        topicName: ${self:custom.constants.WAREHOUSE.SNS_TOPIC}
+        filterPolicy:
+          event_type:
+            - 'soymichel-dev.restaurant-warehouse.v1.ingredient.decremented.stock'

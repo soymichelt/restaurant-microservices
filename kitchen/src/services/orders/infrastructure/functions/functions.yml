@@ -1,6 +1,7 @@
 order-get-all:
   role: IamRestaurantKitchenLambdaAccessRole
   handler: src/services/orders/infrastructure/functions/http/getAll/handler.handler
+  maximumRetryAttempts: 0
   environment:
     MONGO_DATABASE_URI: ${ssm:/restaurant-kitchen/databases/MONGO_URI}
     MONGO_DATABASE_NAME: ${ssm:/restaurant-kitchen/databases/MONGO_NAME}
@@ -11,6 +12,7 @@ order-get-all:
 
 order-create:
   role: IamRestaurantKitchenLambdaAccessRole
+  maximumRetryAttempts: 0
   handler: src/services/orders/infrastructure/functions/http/create/handler.handler
   environment:
     MONGO_DATABASE_URI: ${ssm:/restaurant-kitchen/databases/MONGO_URI}
@@ -20,3 +22,30 @@ order-create:
     - httpApi:
         method: POST
         path: /kitchen/orders
+
+order-prepare-sqs:
+  role: IamRestaurantKitchenLambdaAccessRole
+  handler: src/services/orders/infrastructure/functions/sqs/prepare/handler.handler
+  maximumRetryAttempts: 0
+  environment:
+    MONGO_DATABASE_URI: ${ssm:/restaurant-kitchen/databases/MONGO_URI}
+    MONGO_DATABASE_NAME: ${ssm:/restaurant-kitchen/databases/MONGO_NAME}
+    SQS_URL: !Ref EventBusSqsRestaurantKitchenQueue
+    LAMBDA_ORDER_INGREDIENTS_STOCK: ${self:custom.environment.RESTAURANT_WAREHOUSE.LAMBDA_ORDER_INGREDIENTS_STOCK}
+  events:
+    - sqs:
+        batchSize: 1
+        arn:
+          Fn::GetAtt: [EventBusSqsRestaurantKitchenQueue, Arn]
+
+order-done:
+  role: IamRestaurantKitchenLambdaAccessRole
+  handler: src/services/orders/infrastructure/functions/http/done/handler.handler
+  maximumRetryAttempts: 0
+  environment:
+    MONGO_DATABASE_URI: ${ssm:/restaurant-kitchen/databases/MONGO_URI}
+    MONGO_DATABASE_NAME: ${ssm:/restaurant-kitchen/databases/MONGO_NAME}
+  events:
+    - httpApi:
+        method: PATCH
+        path: /kitchen/orders/{orderId}

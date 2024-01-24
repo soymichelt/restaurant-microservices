@@ -1,6 +1,6 @@
 {
   "name": "restaurant-account",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Restaurant account microservices - Manage users and roles",
   "scripts": {
     "lint": "eslint --color ./src/**/*.ts && tsc --noEmit",

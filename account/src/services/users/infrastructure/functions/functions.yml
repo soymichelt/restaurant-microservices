@@ -1,4 +1,4 @@
-user-create:
+user-signup:
   role: IamRestaurantAccountLambdaAccessRole
   handler: src/services/users/infrastructure/functions/http/create/handler.handler
   environment:

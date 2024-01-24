@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/soymichelt/restaurant-microservices/compare/warehouse-v0.4.0...warehouse-v0.5.0) (2024-01-24)
+
+
+### Features
+
+* add get all movements use case ([bc0c451](https://github.com/soymichelt/restaurant-microservices/commit/bc0c451efe25326f06136fa03f6fbb9e039faabc))
+
 ## [0.4.0](https://github.com/soymichelt/restaurant-microservices/compare/warehouse-v0.3.0...warehouse-v0.4.0) (2024-01-24)
 
 

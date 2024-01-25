@@ -46,6 +46,7 @@ functions:
   - ${file(src/services/ping/infrastructure/functions/functions.yml)}
   - ${file(src/services/recipes/infrastructure/functions/functions.yml)}
   - ${file(src/services/orders/infrastructure/functions/functions.yml)}
+  - ${file(src/services/ordersHistory/infrastructure/functions/functions.yml)}
 
 resources:
   - ${file(cloud-config/iamPolicies.yml)}

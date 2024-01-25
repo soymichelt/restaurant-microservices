@@ -1,8 +1,8 @@
-import { OrderId } from '@services/orders/domain/valueObjects/orderId';
 import { DomainException } from '@shared/domain/exceptions/baseException';
 import { ERROR_CODES } from '@shared/domain/exceptions/errorsCode';
 import { ErrorType } from '@shared/domain/valueObjects/errorTypeEnum';
 import { IntegerValueObject } from '@shared/domain/valueObjects/integerValueObject';
+import { OrderId } from '@shared/domain/valueObjects/orderId';
 import { StringValueObject } from '@shared/domain/valueObjects/stringValueObject';
 
 export class OrderNotFoundException extends DomainException {

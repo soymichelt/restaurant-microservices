@@ -1,7 +1,7 @@
 import { Order } from '@services/orders/domain/order';
-import { OrderState } from '@services/orders/domain/valueObjects/orderState';
 import { BaseEventPrimitivesProps } from '@shared/domain/events/baseEvent';
 import { DomainEvent } from '@shared/domain/events/domainEvent';
+import { OrderState } from '@shared/domain/valueObjects/orderState';
 
 type OrderStateUpdatedEventPrimitives = BaseEventPrimitivesProps & {
   orderId: string;

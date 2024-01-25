@@ -2,10 +2,10 @@ import { OrderResponse } from '@services/orders/application/responses/orderRespo
 import { UpdateOrderStateRequest } from '@services/orders/application/useCases/updateState/updateOrderStateRequest';
 import { OrderNotFoundException } from '@services/orders/domain/exceptions/orderNotFoundException';
 import { OrderRepository } from '@services/orders/domain/repositories/orderRepository';
-import { OrderId } from '@services/orders/domain/valueObjects/orderId';
-import { OrderState } from '@services/orders/domain/valueObjects/orderState';
 import { EventBus } from '@shared/domain/events/eventBus';
 import { UseCase } from '@shared/domain/useCases/useCase';
+import { OrderId } from '@shared/domain/valueObjects/orderId';
+import { OrderState } from '@shared/domain/valueObjects/orderState';
 import { inject, injectable } from 'tsyringe';
 
 @injectable()

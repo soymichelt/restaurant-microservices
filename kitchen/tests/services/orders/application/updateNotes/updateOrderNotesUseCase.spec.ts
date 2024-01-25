@@ -3,7 +3,7 @@ import { UpdateOrderNotesRequest } from '@services/orders/application/useCases/u
 import { UpdateOrderNotesUseCase } from '@services/orders/application/useCases/updateNotes/updateOrderNotesUseCase';
 import { Order } from '@services/orders/domain/order';
 import { OrderRepository } from '@services/orders/domain/repositories/orderRepository';
-import { OrderId } from '@services/orders/domain/valueObjects/orderId';
+import { OrderId } from '@shared/domain/valueObjects/orderId';
 import { anything, deepEqual, instance, mock, reset, verify, when } from 'ts-mockito';
 
 jest.setTimeout(300000);

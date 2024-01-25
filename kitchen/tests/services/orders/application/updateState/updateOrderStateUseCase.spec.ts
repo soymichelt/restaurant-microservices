@@ -4,8 +4,8 @@ import { UpdateOrderStateUseCase } from '@services/orders/application/useCases/u
 import { OrderStateUpdatedEvent } from '@services/orders/domain/events/orderStateUpdatedEvent';
 import { Order } from '@services/orders/domain/order';
 import { OrderRepository } from '@services/orders/domain/repositories/orderRepository';
-import { OrderId } from '@services/orders/domain/valueObjects/orderId';
 import { EventBus } from '@shared/domain/events/eventBus';
+import { OrderId } from '@shared/domain/valueObjects/orderId';
 import { anyOfClass, anything, deepEqual, instance, mock, reset, verify, when } from 'ts-mockito';
 
 jest.setTimeout(300000);

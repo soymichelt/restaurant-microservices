@@ -1,7 +1,7 @@
 /* eslint-disable max-lines-per-function */
 import { Order } from '@services/orders/domain/order';
-import { OrderState } from '@shared/domain/valueObjects/orderState';
 import { OrderId } from '@shared/domain/valueObjects/orderId';
+import { OrderState } from '@shared/domain/valueObjects/orderState';
 import { RecipeId } from '@shared/domain/valueObjects/recipeId';
 
 describe('Tests Order aggregate root', () => {

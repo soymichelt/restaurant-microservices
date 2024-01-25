@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.1](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-kitchen-v0.8.0...restaurant-kitchen-v0.8.1) (2024-01-25)
+
+
+### Bug Fixes
+
+* correcting bug in updateState when new state is DONE ([acf90db](https://github.com/soymichelt/restaurant-microservices/commit/acf90db8c6f4b74f85334f4d461c2248196bb552))
+
 ## [0.8.0](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-kitchen-v0.7.0...restaurant-kitchen-v0.8.0) (2024-01-25)
 
 

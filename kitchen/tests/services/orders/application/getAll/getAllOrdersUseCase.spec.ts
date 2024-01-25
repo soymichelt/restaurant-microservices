@@ -52,6 +52,7 @@ describe('Tests GetAllOrdersUseCase', () => {
       name: 'Receta 1',
       description: 'Receta 1',
       preparationMethod: 'Pasos para preparar esta receta',
+      ingredients: [],
       createdAt: '2024-01-20',
       updatedAt: '2024-01-20',
     });
@@ -61,6 +62,7 @@ describe('Tests GetAllOrdersUseCase', () => {
       name: 'Receta 2',
       description: 'Receta 2',
       preparationMethod: 'Pasos para preparar esta receta',
+      ingredients: [],
       createdAt: '2024-01-20',
       updatedAt: '2024-01-20',
     });
@@ -83,6 +85,7 @@ describe('Tests GetAllOrdersUseCase', () => {
         recipeName: 'Receta 1',
         recipeDescription: 'Receta 1',
         recipePreparationMethod: 'Pasos para preparar esta receta',
+        ingredients: [],
         state: 'todo',
         createdAt: '2024-01-20',
         updatedAt: '2024-01-20',
@@ -93,6 +96,7 @@ describe('Tests GetAllOrdersUseCase', () => {
         recipeName: 'Receta 2',
         recipeDescription: 'Receta 2',
         recipePreparationMethod: 'Pasos para preparar esta receta',
+        ingredients: [],
         state: 'todo',
         createdAt: '2024-01-20',
         updatedAt: '2024-01-20',

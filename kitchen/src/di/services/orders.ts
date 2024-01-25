@@ -1,13 +1,13 @@
 import { container } from '@di/shared';
 import { CreateOrderUseCase } from '@services/orders/application/useCases/create/createOrderUseCase';
-import { DoneOrderUseCase } from '@services/orders/application/useCases/done/doneOrderUseCase';
 import { GetAllOrdersUseCase } from '@services/orders/application/useCases/getAll/getAllOrdersUseCase';
+import { MoveToNextOrderStateUseCase } from '@services/orders/application/useCases/moveState/moveToNextOrderStateUseCase';
 import { PrepareOrderUseCase } from '@services/orders/application/useCases/prepare/prepareOrderUseCase';
 import { OrderRepository } from '@services/orders/domain/repositories/orderRepository';
 import { OrderIngredientsService } from '@services/orders/domain/services/orderIngredientsService';
 import { CreateOrderController } from '@services/orders/infrastructure/functions/http/create/controller';
-import { DoneOrderController } from '@services/orders/infrastructure/functions/http/done/controller';
 import { GetAllOrdersController } from '@services/orders/infrastructure/functions/http/getAll/controller';
+import { MoveToNextOrderStateController } from '@services/orders/infrastructure/functions/http/moveState/controller';
 import { PrepareOrderController } from '@services/orders/infrastructure/functions/sqs/prepare/controller';
 import { MongoOrderRepository } from '@services/orders/infrastructure/persistence/mongodb/mongoOrderRepository';
 import { OrderIngredientsServiceImplemented } from '@services/orders/infrastructure/services/orderIngredientsService';
@@ -24,7 +24,7 @@ container
   .register<GetAllOrdersController>('GetAllOrdersController', GetAllOrdersController)
   .register<PrepareOrderUseCase>('PrepareOrderUseCase', PrepareOrderUseCase)
   .register<PrepareOrderController>('PrepareOrderController', PrepareOrderController)
-  .register<DoneOrderUseCase>('DoneOrderUseCase', DoneOrderUseCase)
-  .register<DoneOrderController>('DoneOrderController', DoneOrderController);
+  .register<MoveToNextOrderStateUseCase>('MoveToNextOrderStateUseCase', MoveToNextOrderStateUseCase)
+  .register<MoveToNextOrderStateController>('MoveToNextOrderStateController', MoveToNextOrderStateController);
 
 export { container };

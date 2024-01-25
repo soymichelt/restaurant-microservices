@@ -7,16 +7,17 @@ import { IntegerValueObject } from '@shared/domain/valueObjects/integerValueObje
 import { StringValueObject } from '@shared/domain/valueObjects/stringValueObject';
 
 export class OrderStateInvalidException extends DomainException {
-  constructor(orderId: OrderId, state: OrderState) {
+  constructor(orderId: OrderId, currentStage: OrderState, newState?: OrderState) {
     super({
       name: StringValueObject.build('OrderStateInvalidException'),
-      message: StringValueObject.build(`Only orders that are in preparation can be finalized`),
+      message: StringValueObject.build(`Cannot change status from "${currentStage.value}" to "${newState.value}"`),
       status: IntegerValueObject.build(500),
       code: StringValueObject.build(ERROR_CODES['OrderStateInvalidException']),
       errorType: ErrorType.error(),
       metadata: {
         orderId: orderId.value,
-        state: state.value,
+        currentState: currentStage.value,
+        newState: newState?.value,
       },
     });
   }

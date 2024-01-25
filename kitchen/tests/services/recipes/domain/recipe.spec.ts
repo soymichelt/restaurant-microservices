@@ -20,6 +20,7 @@ describe('Tests Recipe aggregate root', () => {
       name: 'Ensalada de pollo',
       description: 'Ensalada de lechuga con tomate y pollo',
       preparationMethod: 'Corte los vegetales y revuelva con el pollo',
+      ingredients: [],
       createdAt: expect.any(String),
       updatedAt: expect.any(String),
     });
@@ -31,6 +32,7 @@ describe('Tests Recipe aggregate root', () => {
       name: 'Ensalada de pollo',
       description: 'Ensalada de lechuga con tomate y pollo',
       preparationMethod: 'Corte los vegetales y revuelva con el pollo',
+      ingredients: [],
       createdAt: '2024-01-20',
       updatedAt: '2024-01-20',
     });
@@ -42,6 +44,7 @@ describe('Tests Recipe aggregate root', () => {
       name: 'Ensalada de pollo',
       description: 'Ensalada de lechuga con tomate y pollo',
       preparationMethod: 'Corte los vegetales y revuelva con el pollo',
+      ingredients: [],
       createdAt: expect.any(String),
       updatedAt: expect.any(String),
     });

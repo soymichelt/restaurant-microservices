@@ -50,3 +50,16 @@ order-move-to-next-state:
     - httpApi:
         method: PATCH
         path: /kitchen/orders/{orderId}
+
+order-update-state:
+  role: IamRestaurantKitchenLambdaAccessRole
+  handler: src/services/orders/infrastructure/functions/http/updateState/handler.handler
+  maximumRetryAttempts: 0
+  environment:
+    SNS_TOPIC_ARN: !Ref EventBusSnsRestaurantKitchenTopic
+    MONGO_DATABASE_URI: ${ssm:/restaurant-kitchen/databases/MONGO_URI}
+    MONGO_DATABASE_NAME: ${ssm:/restaurant-kitchen/databases/MONGO_NAME}
+  events:
+    - httpApi:
+        method: PATCH
+        path: /kitchen/orders/{orderId}/updateState

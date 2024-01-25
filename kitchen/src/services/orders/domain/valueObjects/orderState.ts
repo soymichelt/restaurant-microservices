@@ -35,7 +35,7 @@ export class OrderState extends EnumValueObject<OrderStateEnum> {
   }
 
   public isTodo(): boolean {
-    return this.value === OrderStateEnum.done;
+    return this.value === OrderStateEnum.todo;
   }
 
   public isInProgress(): boolean {

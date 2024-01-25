@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.1](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-kitchen-v0.11.0...restaurant-kitchen-v0.11.1) (2024-01-25)
+
+
+### Bug Fixes
+
+* correcting bug to create order history use case ([5d271d4](https://github.com/soymichelt/restaurant-microservices/commit/5d271d468f8037670c7791581b881b459a91be93))
+
 ## [0.11.0](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-kitchen-v0.10.0...restaurant-kitchen-v0.11.0) (2024-01-25)
 
 

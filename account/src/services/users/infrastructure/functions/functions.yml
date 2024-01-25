@@ -7,6 +7,7 @@ user-signup:
     MONGO_DATABASE_NAME: ${ssm:/restaurant-account/databases/MONGO_NAME}
     CRYPTO_SECRET_KEY: ${ssm:/restaurant-account/crypto/SECRET_KEY}
     CRYPTO_SECRET_IV: ${ssm:/restaurant-account/crypto/SECRET_IV}
+    JWT_PRIVATE_KEY: ${ssm:/restaurant-account/jwt/PRIVATE_KEY}
   events:
     - httpApi:
         method: POST

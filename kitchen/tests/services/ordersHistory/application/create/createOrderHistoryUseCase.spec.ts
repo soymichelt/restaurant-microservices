@@ -31,6 +31,7 @@ describe('Tests CreateOrderHistoryUseCase', () => {
     const [orderHistory] = capture(orderHistoryRepositoryMock.update).first();
     const result = orderHistory.toPrimitives();
     expect(result).toEqual({
+      orderHistoryId: expect.any(String),
       orderId: '5fa46367-8584-41fa-b85d-0fe4b59ddd47',
       state: 'todo',
       prevState: 'inProgress',

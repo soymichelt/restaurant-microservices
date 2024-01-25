@@ -1,9 +1,11 @@
+import { OrderHistoryId } from '@services/ordersHistory/domain/valueObjects/orderHistoryId';
 import { AggregateRoot } from '@shared/domain/aggregateRoot';
 import { DateValueObject } from '@shared/domain/valueObjects/dateValueObject';
 import { OrderId } from '@shared/domain/valueObjects/orderId';
 import { OrderState } from '@shared/domain/valueObjects/orderState';
 
 export type OrderHistoryProps = {
+  orderHistoryId: OrderHistoryId;
   orderId: OrderId;
   state: OrderState;
   prevState: OrderState;
@@ -13,6 +15,7 @@ export type OrderHistoryProps = {
 };
 
 export type OrderHistoryPrimitives = {
+  orderHistoryId: string;
   orderId: string;
   state: string;
   prevState: string;
@@ -22,6 +25,7 @@ export type OrderHistoryPrimitives = {
 };
 
 export class OrderHistory extends AggregateRoot {
+  private _orderHistoryId: OrderHistoryId;
   private _orderId: OrderId;
   private _state: OrderState;
   private _prevState: OrderState;
@@ -29,12 +33,17 @@ export class OrderHistory extends AggregateRoot {
   private constructor(props: OrderHistoryProps) {
     super();
 
+    this._orderHistoryId = props.orderHistoryId;
     this._orderId = props.orderId;
     this._state = props.state;
     this._prevState = props.prevState;
 
     this.createdAt = props.createdAt ?? DateValueObject.now();
     this.updatedAt = props.updatedAt ?? DateValueObject.now();
+  }
+
+  public get orderHistoryId(): OrderHistoryId {
+    return this._orderHistoryId;
   }
 
   public get orderId(): OrderId {
@@ -47,6 +56,7 @@ export class OrderHistory extends AggregateRoot {
 
   public static fromPrimitives(props: OrderHistoryPrimitives): OrderHistory {
     return this.build({
+      orderHistoryId: props.orderHistoryId ? OrderHistoryId.build(props.orderHistoryId) : OrderHistoryId.newId(),
       orderId: OrderId.build(props.orderId),
       state: OrderState.fromString(props.state),
       prevState: OrderState.fromString(props.prevState),
@@ -58,6 +68,7 @@ export class OrderHistory extends AggregateRoot {
 
   public toPrimitives(): OrderHistoryPrimitives {
     return {
+      orderHistoryId: this._orderHistoryId.value,
       orderId: this._orderId.value,
       state: this._state.value,
       prevState: this._prevState.value,

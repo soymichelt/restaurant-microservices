@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-account-v0.2.0...restaurant-account-v0.3.0) (2024-01-25)
+
+
+### Features
+
+* add JWT env variable to user-signup lambda ([8e8698b](https://github.com/soymichelt/restaurant-microservices/commit/8e8698ba196654ca8e921db133173d3da01b611b))
+
 ## [0.2.0](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-account-v0.1.0...restaurant-account-v0.2.0) (2024-01-24)
 
 

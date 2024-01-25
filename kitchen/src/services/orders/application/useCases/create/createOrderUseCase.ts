@@ -2,11 +2,11 @@ import { OrderResponse } from '@services/orders/application/responses/orderRespo
 import { RecipeNotFoundException } from '@services/orders/domain/exceptions/recipeNotFoundException';
 import { Order } from '@services/orders/domain/order';
 import { OrderRepository } from '@services/orders/domain/repositories/orderRepository';
-import { OrderId } from '@services/orders/domain/valueObjects/orderId';
-import { OrderState } from '@services/orders/domain/valueObjects/orderState';
 import { RecipeRepository } from '@services/recipes/domain/repositories/recipeRepository';
 import { EventBus } from '@shared/domain/events/eventBus';
 import { UseCase } from '@shared/domain/useCases/useCase';
+import { OrderId } from '@shared/domain/valueObjects/orderId';
+import { OrderState } from '@shared/domain/valueObjects/orderState';
 import { inject, injectable } from 'tsyringe';
 
 @injectable()

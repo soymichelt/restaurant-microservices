@@ -1,11 +1,11 @@
 import { OrderCreatedEvent } from '@services/orders/domain/events/orderCreatedEvent';
 import { OrderStateUpdatedEvent } from '@services/orders/domain/events/orderStateUpdatedEvent';
 import { OrderStateInvalidException } from '@services/orders/domain/exceptions/orderStateInvalidException';
-import { OrderId } from '@services/orders/domain/valueObjects/orderId';
 import { OrderNotes } from '@services/orders/domain/valueObjects/orderNotes';
-import { OrderState } from '@services/orders/domain/valueObjects/orderState';
 import { AggregateRoot } from '@shared/domain/aggregateRoot';
 import { DateValueObject } from '@shared/domain/valueObjects/dateValueObject';
+import { OrderId } from '@shared/domain/valueObjects/orderId';
+import { OrderState } from '@shared/domain/valueObjects/orderState';
 import { RecipeId } from '@shared/domain/valueObjects/recipeId';
 
 export type OrderProps = {

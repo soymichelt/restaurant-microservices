@@ -1,9 +1,9 @@
-import { OrderId } from '@services/orders/domain/valueObjects/orderId';
-import { OrderState } from '@services/orders/domain/valueObjects/orderState';
 import { DomainException } from '@shared/domain/exceptions/baseException';
 import { ERROR_CODES } from '@shared/domain/exceptions/errorsCode';
 import { ErrorType } from '@shared/domain/valueObjects/errorTypeEnum';
 import { IntegerValueObject } from '@shared/domain/valueObjects/integerValueObject';
+import { OrderId } from '@shared/domain/valueObjects/orderId';
+import { OrderState } from '@shared/domain/valueObjects/orderState';
 import { StringValueObject } from '@shared/domain/valueObjects/stringValueObject';
 
 export class OrderStateInvalidException extends DomainException {

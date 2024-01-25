@@ -1,6 +1,6 @@
 import { Order } from '@services/orders/domain/order';
 import { OrderRepository } from '@services/orders/domain/repositories/orderRepository';
-import { OrderId } from '@services/orders/domain/valueObjects/orderId';
+import { OrderId } from '@shared/domain/valueObjects/orderId';
 import { MongoRepository } from '@shared/infrastructure/persistence/mongodb/mongoRepository';
 import { injectable } from 'tsyringe';
 

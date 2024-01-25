@@ -4,10 +4,10 @@ import { OrderNotFoundException } from '@services/orders/domain/exceptions/order
 import { RecipeNotFoundException } from '@services/orders/domain/exceptions/recipeNotFoundException';
 import { OrderRepository } from '@services/orders/domain/repositories/orderRepository';
 import { OrderIngredientsService } from '@services/orders/domain/services/orderIngredientsService';
-import { OrderId } from '@services/orders/domain/valueObjects/orderId';
 import { RecipeRepository } from '@services/recipes/domain/repositories/recipeRepository';
 import { EventBus } from '@shared/domain/events/eventBus';
 import { UseCase } from '@shared/domain/useCases/useCase';
+import { OrderId } from '@shared/domain/valueObjects/orderId';
 import { inject, injectable } from 'tsyringe';
 
 @injectable()

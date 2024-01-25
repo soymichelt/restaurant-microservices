@@ -2,9 +2,9 @@ import { OrderResponse } from '@services/orders/application/responses/orderRespo
 import { UpdateOrderNotesRequest } from '@services/orders/application/useCases/updateNotes/updateOrderNotesRequest';
 import { OrderNotFoundException } from '@services/orders/domain/exceptions/orderNotFoundException';
 import { OrderRepository } from '@services/orders/domain/repositories/orderRepository';
-import { OrderId } from '@services/orders/domain/valueObjects/orderId';
 import { OrderNotes } from '@services/orders/domain/valueObjects/orderNotes';
 import { UseCase } from '@shared/domain/useCases/useCase';
+import { OrderId } from '@shared/domain/valueObjects/orderId';
 import { inject, injectable } from 'tsyringe';
 
 @injectable()

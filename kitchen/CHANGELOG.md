@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.0](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-kitchen-v0.8.1...restaurant-kitchen-v0.9.0) (2024-01-25)
+
+
+### Features
+
+* add update order notes use case ([1e0b27a](https://github.com/soymichelt/restaurant-microservices/commit/1e0b27a627e2370e4a77ad1097bdf887e7fee438))
+
 ## [0.8.1](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-kitchen-v0.8.0...restaurant-kitchen-v0.8.1) (2024-01-25)
 
 

@@ -77,4 +77,86 @@ describe('Tests Order aggregate root', () => {
       updatedAt: '2024-01-20T00:00:00.000Z',
     });
   });
+
+  describe('Tests order steps', () => {
+    test('Test markAsInProgress method', () => {
+      const order = Order.build({
+        orderId: OrderId.build('5fa46367-8584-41fa-b85d-0fe4b59ddd47'),
+        recipeId: RecipeId.build('4d646367-8584-41fa-b85d-0fe4b59ddd47'),
+        state: OrderState.todo(),
+      });
+
+      order.markAsInProgress();
+
+      const result = order.toPrimitives();
+
+      expect(result).toEqual({
+        orderId: '5fa46367-8584-41fa-b85d-0fe4b59ddd47',
+        recipeId: '4d646367-8584-41fa-b85d-0fe4b59ddd47',
+        state: 'inProgress',
+        createdAt: expect.any(String),
+        updatedAt: expect.any(String),
+      });
+    });
+
+    test('Test markAsNextState method: move state from "inProgress" to "done"', () => {
+      const order = Order.build({
+        orderId: OrderId.build('5fa46367-8584-41fa-b85d-0fe4b59ddd47'),
+        recipeId: RecipeId.build('4d646367-8584-41fa-b85d-0fe4b59ddd47'),
+        state: OrderState.inProgress(),
+      });
+
+      order.markAsNextState();
+
+      const result = order.toPrimitives();
+
+      expect(result).toEqual({
+        orderId: '5fa46367-8584-41fa-b85d-0fe4b59ddd47',
+        recipeId: '4d646367-8584-41fa-b85d-0fe4b59ddd47',
+        state: 'done',
+        createdAt: expect.any(String),
+        updatedAt: expect.any(String),
+      });
+    });
+
+    test('Test markAsNextState method: move state from "done" to "delivered"', () => {
+      const order = Order.build({
+        orderId: OrderId.build('5fa46367-8584-41fa-b85d-0fe4b59ddd47'),
+        recipeId: RecipeId.build('4d646367-8584-41fa-b85d-0fe4b59ddd47'),
+        state: OrderState.done(),
+      });
+
+      order.markAsNextState();
+
+      const result = order.toPrimitives();
+
+      expect(result).toEqual({
+        orderId: '5fa46367-8584-41fa-b85d-0fe4b59ddd47',
+        recipeId: '4d646367-8584-41fa-b85d-0fe4b59ddd47',
+        state: 'delivered',
+        createdAt: expect.any(String),
+        updatedAt: expect.any(String),
+      });
+    });
+
+    test('Test markAsNextState method, when current state is "delivered"', () => {
+      const order = Order.build({
+        orderId: OrderId.build('5fa46367-8584-41fa-b85d-0fe4b59ddd47'),
+        recipeId: RecipeId.build('4d646367-8584-41fa-b85d-0fe4b59ddd47'),
+        state: OrderState.delivered(),
+      });
+
+      expect(() => order.markAsNextState()).toThrow('');
+
+      const result = order.toPrimitives();
+
+      expect(result).toEqual({
+        orderId: '5fa46367-8584-41fa-b85d-0fe4b59ddd47',
+        recipeId: '4d646367-8584-41fa-b85d-0fe4b59ddd47',
+        state: 'delivered',
+        createdAt: expect.any(String),
+        updatedAt: expect.any(String),
+      });
+    });
+  });
 });

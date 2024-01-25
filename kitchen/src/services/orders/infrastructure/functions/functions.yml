@@ -38,11 +38,12 @@ order-prepare-sqs:
         arn:
           Fn::GetAtt: [EventBusSqsRestaurantKitchenQueue, Arn]
 
-order-done:
+order-move-to-next-state:
   role: IamRestaurantKitchenLambdaAccessRole
-  handler: src/services/orders/infrastructure/functions/http/done/handler.handler
+  handler: src/services/orders/infrastructure/functions/http/moveState/handler.handler
   maximumRetryAttempts: 0
   environment:
+    SNS_TOPIC_ARN: !Ref EventBusSnsRestaurantKitchenTopic
     MONGO_DATABASE_URI: ${ssm:/restaurant-kitchen/databases/MONGO_URI}
     MONGO_DATABASE_NAME: ${ssm:/restaurant-kitchen/databases/MONGO_NAME}
   events:

@@ -1,4 +1,5 @@
 import { OrderCreatedEvent } from '@services/orders/domain/events/orderCreatedEvent';
+import { OrderStateUpdatedEvent } from '@services/orders/domain/events/orderStateUpdatedEvent';
 import { OrderStateInvalidException } from '@services/orders/domain/exceptions/orderStateInvalidException';
 import { OrderId } from '@services/orders/domain/valueObjects/orderId';
 import { OrderState } from '@services/orders/domain/valueObjects/orderState';
@@ -72,16 +73,25 @@ export class Order extends AggregateRoot {
 
   public markAsInProgress(): void {
     this.updatedAt = DateValueObject.now();
-    this._state = OrderState.inProgress();
+    this.changeState(OrderState.inProgress());
   }
 
-  public markAsDone(): void {
-    if (this._state.isTodo() || this._state.isDone()) {
+  public markAsNextState(): void {
+    if (this._state.isFinalState()) {
       throw new OrderStateInvalidException(this._orderId, this._state);
     }
 
     this.updatedAt = DateValueObject.now();
-    this._state = OrderState.done();
+    this.changeState(this._state.nextStep());
+  }
+
+  public updateState(newState: OrderState): void {
+    if (newState.isTodo()) {
+      throw new OrderStateInvalidException(this._orderId, this._state, newState);
+    }
+
+    this.updatedAt = DateValueObject.now();
+    this.changeState(newState);
   }
 
   public requestOrderAgain(): void {
@@ -98,5 +108,12 @@ export class Order extends AggregateRoot {
       createdAt: this.createdAt.toString(),
       updatedAt: this.updatedAt.toString(),
     };
+  }
+
+  private changeState(newState: OrderState): void {
+    const prevState = this._state;
+    this._state = newState;
+    const event = OrderStateUpdatedEvent.build(this, prevState);
+    this.pushEvent(event);
   }
 }

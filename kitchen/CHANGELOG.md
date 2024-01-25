@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.10.0](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-kitchen-v0.9.0...restaurant-kitchen-v0.10.0) (2024-01-25)
+
+
+### Features
+
+* add create order history use case ([ba92c1b](https://github.com/soymichelt/restaurant-microservices/commit/ba92c1b3117bd8a2d15d6f4bd3ca9ac25b3726c3))
+* add new aggregate root OrderHistory ([18ff1ad](https://github.com/soymichelt/restaurant-microservices/commit/18ff1adc5be6938b42df797edb502c0612b35699))
+* add new repository to order history ([b037d8f](https://github.com/soymichelt/restaurant-microservices/commit/b037d8ffd6b4ddc74cb61b952db8d74fbb88ad98))
+* promove OrderId and OrderState to shared kernel ([b6f34be](https://github.com/soymichelt/restaurant-microservices/commit/b6f34be089bf1ecfb9d5368a0c189cba230dea83))
+
 ## [0.9.0](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-kitchen-v0.8.1...restaurant-kitchen-v0.9.0) (2024-01-25)
 
 

@@ -15,7 +15,7 @@ export class MongoOrderHistoryRepository extends MongoRepository<OrderHistory> i
   public async all(orderId: OrderId): Promise<OrderHistory[]> {
     const collection = await this.collection();
     const documents = await collection.find({ _id: orderId.value }).toArray();
-    if (!documents?.length) return;
+    if (!documents?.length) return [];
 
     return documents.map((document) => this.mapToOrderHistory(document));
   }

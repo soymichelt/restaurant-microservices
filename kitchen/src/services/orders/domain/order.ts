@@ -2,6 +2,7 @@ import { OrderCreatedEvent } from '@services/orders/domain/events/orderCreatedEv
 import { OrderStateUpdatedEvent } from '@services/orders/domain/events/orderStateUpdatedEvent';
 import { OrderStateInvalidException } from '@services/orders/domain/exceptions/orderStateInvalidException';
 import { OrderId } from '@services/orders/domain/valueObjects/orderId';
+import { OrderNotes } from '@services/orders/domain/valueObjects/orderNotes';
 import { OrderState } from '@services/orders/domain/valueObjects/orderState';
 import { AggregateRoot } from '@shared/domain/aggregateRoot';
 import { DateValueObject } from '@shared/domain/valueObjects/dateValueObject';
@@ -11,6 +12,7 @@ export type OrderProps = {
   orderId: OrderId;
   recipeId: RecipeId;
   state: OrderState;
+  notes?: OrderNotes;
 
   createdAt?: DateValueObject;
   updatedAt?: DateValueObject;
@@ -20,6 +22,7 @@ export type OrderPrimitives = {
   orderId: string;
   recipeId: string;
   state: string;
+  notes?: string;
 
   createdAt: string;
   updatedAt: string;
@@ -29,6 +32,7 @@ export class Order extends AggregateRoot {
   private _orderId: OrderId;
   private _recipeId: RecipeId;
   private _state: OrderState;
+  private _notes: OrderNotes;
 
   private constructor(props: OrderProps) {
     super();
@@ -36,6 +40,7 @@ export class Order extends AggregateRoot {
     this._orderId = props.orderId;
     this._recipeId = props.recipeId;
     this._state = props.state;
+    this._notes = props.notes;
 
     this.createdAt = props.createdAt ?? DateValueObject.now();
     this.updatedAt = props.updatedAt ?? DateValueObject.now();
@@ -65,10 +70,16 @@ export class Order extends AggregateRoot {
       orderId: OrderId.build(props.orderId),
       recipeId: RecipeId.build(props.recipeId),
       state: OrderState.fromString(props.state),
+      notes: props.notes ? OrderNotes.build(props.notes) : undefined,
 
       createdAt: DateValueObject.fromString(props.createdAt),
       updatedAt: DateValueObject.fromString(props.updatedAt),
     });
+  }
+
+  public updateNotes(notes: OrderNotes): void {
+    this.updatedAt = DateValueObject.now();
+    this._notes = notes;
   }
 
   public markAsInProgress(): void {
@@ -104,6 +115,7 @@ export class Order extends AggregateRoot {
       orderId: this._orderId.value,
       recipeId: this._recipeId.value,
       state: this._state.value,
+      notes: this._notes?.value,
 
       createdAt: this.createdAt.toString(),
       updatedAt: this.updatedAt.toString(),

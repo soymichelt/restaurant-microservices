@@ -40,6 +40,8 @@ export class MongoOrderRepository extends MongoRepository<Order> implements Orde
       orderId: document.orderId,
       recipeId: document.recipeId,
       state: document.state,
+      notes: document.notes,
+
       createdAt: document.createdAt,
       updatedAt: document.updatedAt,
     });

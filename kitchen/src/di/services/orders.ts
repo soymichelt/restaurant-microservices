@@ -3,12 +3,14 @@ import { CreateOrderUseCase } from '@services/orders/application/useCases/create
 import { GetAllOrdersUseCase } from '@services/orders/application/useCases/getAll/getAllOrdersUseCase';
 import { MoveToNextOrderStateUseCase } from '@services/orders/application/useCases/moveState/moveToNextOrderStateUseCase';
 import { PrepareOrderUseCase } from '@services/orders/application/useCases/prepare/prepareOrderUseCase';
+import { UpdateOrderNotesUseCase } from '@services/orders/application/useCases/updateNotes/updateOrderNotesUseCase';
 import { UpdateOrderStateUseCase } from '@services/orders/application/useCases/updateState/updateOrderStateUseCase';
 import { OrderRepository } from '@services/orders/domain/repositories/orderRepository';
 import { OrderIngredientsService } from '@services/orders/domain/services/orderIngredientsService';
 import { CreateOrderController } from '@services/orders/infrastructure/functions/http/create/controller';
 import { GetAllOrdersController } from '@services/orders/infrastructure/functions/http/getAll/controller';
 import { MoveToNextOrderStateController } from '@services/orders/infrastructure/functions/http/moveState/controller';
+import { UpdateOrderNotesController } from '@services/orders/infrastructure/functions/http/updateNotes/controller';
 import { UpdateOrderStateController } from '@services/orders/infrastructure/functions/http/updateState/controller';
 import { PrepareOrderController } from '@services/orders/infrastructure/functions/sqs/prepare/controller';
 import { MongoOrderRepository } from '@services/orders/infrastructure/persistence/mongodb/mongoOrderRepository';
@@ -29,6 +31,8 @@ container
   .register<MoveToNextOrderStateUseCase>('MoveToNextOrderStateUseCase', MoveToNextOrderStateUseCase)
   .register<MoveToNextOrderStateController>('MoveToNextOrderStateController', MoveToNextOrderStateController)
   .register<UpdateOrderStateUseCase>('UpdateOrderStateUseCase', UpdateOrderStateUseCase)
-  .register<UpdateOrderStateController>('UpdateOrderStateController', UpdateOrderStateController);
+  .register<UpdateOrderStateController>('UpdateOrderStateController', UpdateOrderStateController)
+  .register<UpdateOrderNotesUseCase>('UpdateOrderNotesUseCase', UpdateOrderNotesUseCase)
+  .register<UpdateOrderNotesController>('UpdateOrderNotesController', UpdateOrderNotesController);
 
 export { container };

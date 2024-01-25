@@ -62,4 +62,17 @@ order-update-state:
   events:
     - httpApi:
         method: PATCH
-        path: /kitchen/orders/{orderId}/updateState
+        path: /kitchen/orders/{orderId}/state
+
+order-update-notes:
+  role: IamRestaurantKitchenLambdaAccessRole
+  handler: src/services/orders/infrastructure/functions/http/updateNotes/handler.handler
+  maximumRetryAttempts: 0
+  environment:
+    SNS_TOPIC_ARN: !Ref EventBusSnsRestaurantKitchenTopic
+    MONGO_DATABASE_URI: ${ssm:/restaurant-kitchen/databases/MONGO_URI}
+    MONGO_DATABASE_NAME: ${ssm:/restaurant-kitchen/databases/MONGO_NAME}
+  events:
+    - httpApi:
+        method: PATCH
+        path: /kitchen/orders/{orderId}/notes

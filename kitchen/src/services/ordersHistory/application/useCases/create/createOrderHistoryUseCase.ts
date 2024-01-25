@@ -1,6 +1,7 @@
 import { CreateOrderHistoryRequest } from '@services/ordersHistory/application/useCases/create/createOrderHistoryRequest';
 import { OrderHistory } from '@services/ordersHistory/domain/orderHistory';
 import { OrderHistoryRepository } from '@services/ordersHistory/domain/repositories/orderHistoryRepository';
+import { OrderHistoryId } from '@services/ordersHistory/domain/valueObjects/orderHistoryId';
 import { UseCase } from '@shared/domain/useCases/useCase';
 import { OrderId } from '@shared/domain/valueObjects/orderId';
 import { OrderState } from '@shared/domain/valueObjects/orderState';
@@ -18,6 +19,7 @@ export class CreateOrderHistoryUseCase extends UseCase<CreateOrderHistoryRequest
     const prevState = OrderState.fromString(request.prevState);
 
     const orderHistory = OrderHistory.build({
+      orderHistoryId: OrderHistoryId.newId(),
       orderId,
       state,
       prevState,

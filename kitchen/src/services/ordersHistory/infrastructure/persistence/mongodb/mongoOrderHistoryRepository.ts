@@ -14,19 +14,20 @@ export class MongoOrderHistoryRepository extends MongoRepository<OrderHistory> i
 
   public async all(orderId: OrderId): Promise<OrderHistory[]> {
     const collection = await this.collection();
-    const documents = await collection.find({ _id: orderId.value }).toArray();
+    const documents = await collection.find({ orderId: orderId.value }).toArray();
     if (!documents?.length) return [];
 
     return documents.map((document) => this.mapToOrderHistory(document));
   }
 
   public async update(orderHistory: OrderHistory): Promise<void> {
-    await this.persist(orderHistory.orderId, orderHistory);
+    await this.persist(orderHistory.orderHistoryId, orderHistory);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private mapToOrderHistory(document: any): OrderHistory {
     return OrderHistory.fromPrimitives({
+      orderHistoryId: document.orderHistoryId,
       orderId: document.orderId,
       state: document.state,
       prevState: document.prevState,

@@ -5,9 +5,8 @@ on:
     paths:
       - 'kitchen/**'
     branches:
+      - main
       - '!release-please**'
-    tags:
-      - 'restaurant-kitchen-v**'
 
 jobs:
   deploy:

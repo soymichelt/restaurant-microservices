@@ -10,15 +10,13 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Use Node 20
-        working-directory: ./account
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
 
@@ -34,13 +32,18 @@ jobs:
         working-directory: ./account
         run: npm run test
 
-      - name: Run Build
-        working-directory: ./account
-        run: npm run build
-
       - name: Install Serverless Framework
         working-directory: ./account
         run: npm install -g serverless
+
+      - name: Run Build
+        working-directory: ./account
+        run: npm run build
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          STAGE: ${{ secrets.STAGE }}
 
       - name: Run Deploy to AWS
         working-directory: ./account
@@ -49,3 +52,4 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
+          STAGE: ${{ secrets.STAGE }}

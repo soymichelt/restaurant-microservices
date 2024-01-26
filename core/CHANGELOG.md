@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.0](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-core-v0.0.2...restaurant-core-v0.1.0) (2024-01-26)
+
+
+### Features
+
+* update base controller for all projects ([dc7a63e](https://github.com/soymichelt/restaurant-microservices/commit/dc7a63eb5a5f885c37c05c6a72f7e241176c7cba))
+
 ## [0.0.2](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-core-v0.0.1...restaurant-core-v0.0.2) (2024-01-26)
 
 

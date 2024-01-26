@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.2](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-kitchen-v0.11.1...restaurant-kitchen-v0.11.2) (2024-01-26)
+
+
+### Bug Fixes
+
+* implement aggregate and sample to get a random recipe ([7dfdd8a](https://github.com/soymichelt/restaurant-microservices/commit/7dfdd8a17a6b7a0a8c816fc791086f726506a24d))
+
 ## [0.11.1](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-kitchen-v0.11.0...restaurant-kitchen-v0.11.1) (2024-01-25)
 
 

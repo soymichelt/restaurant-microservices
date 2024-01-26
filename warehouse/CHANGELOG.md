@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.1](https://github.com/soymichelt/restaurant-microservices/compare/warehouse-v0.5.0...warehouse-v0.5.1) (2024-01-26)
+
+
+### Bug Fixes
+
+* remove S3 manifest file and configuration ([27ce6f3](https://github.com/soymichelt/restaurant-microservices/commit/27ce6f3652f529533dc8bddddc9dde659f5d0782))
+
 ## [0.5.0](https://github.com/soymichelt/restaurant-microservices/compare/warehouse-v0.4.0...warehouse-v0.5.0) (2024-01-24)
 
 

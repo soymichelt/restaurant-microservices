@@ -30,16 +30,6 @@ Resources:
                 - arn:aws:ssm:${self:custom.constants.REGION}:${self:custom.environment.AWS_ACCOUNT_ID}:parameter/deployment/restaurant-warehouse/*
               - Effect: 'Allow'
                 Action:
-                  - s3:DeleteObject
-                  - s3:GetObject
-                  - s3:PutObject
-                Resource:
-                  - Fn::Join:
-                      - ''
-                      - - Fn::GetAtt: [S3WarehouseStorage, Arn]
-                        - '/*'
-              - Effect: 'Allow'
-                Action:
                   - sqs:SendMessage
                 Resource:
                   - Fn::GetAtt: [EventBusSqsWarehouseQueue, Arn]

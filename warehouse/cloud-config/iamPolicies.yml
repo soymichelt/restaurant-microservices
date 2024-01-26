@@ -16,7 +16,6 @@ Resources:
               - cloudwatch:*
               - logs:*
               - lambda:*
-              - s3:*
               - events:*
               - sns:*
               - sqs:*

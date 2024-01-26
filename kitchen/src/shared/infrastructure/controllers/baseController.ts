@@ -51,6 +51,8 @@ export abstract class BaseController<RequestType, ResponseType> {
     return {
       statusCode: error.status || 500,
       body: JSON.stringify({
+        statusCode: error.status || 500,
+        errorCode: error.code,
         message: error.message,
       }),
     };

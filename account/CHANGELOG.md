@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-account-v0.3.0...restaurant-account-v0.3.1) (2024-01-26)
+
+
+### Bug Fixes
+
+* remove resend mailing service ([4389888](https://github.com/soymichelt/restaurant-microservices/commit/43898880740bd40aa2d43eda1da94ea255db17e1))
+
 ## [0.3.0](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-account-v0.2.0...restaurant-account-v0.3.0) (2024-01-25)
 
 

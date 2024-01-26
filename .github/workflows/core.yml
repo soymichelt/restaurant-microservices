@@ -5,9 +5,8 @@ on:
     paths:
       - 'core/**'
     branches:
+      - main
       - '!release-please**'
-    tags:
-      - 'restaurant-core-v**'
 
 jobs:
   deploy:

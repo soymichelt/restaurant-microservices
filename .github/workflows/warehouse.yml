@@ -5,9 +5,8 @@ on:
     paths:
       - 'warehouse/**'
     branches:
+      - main
       - '!release-please**'
-    tags:
-      - 'warehouse-v**'
 
 jobs:
   deploy:

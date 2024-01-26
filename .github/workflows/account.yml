@@ -5,9 +5,8 @@ on:
     paths:
       - 'account/**'
     branches:
+      - main
       - '!release-please**'
-    tags:
-      - 'restaurant-account-v**'
 
 jobs:
   deploy:

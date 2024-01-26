@@ -32,7 +32,8 @@ export class MongoRecipeRepository extends MongoRepository<Recipe> implements Re
 
   public async findRand(): Promise<Recipe> {
     const collection = await this.collection();
-    const document = await collection.findOne({ $expr: { $lt: [0.5, { $rand: {} }] } });
+    const randomDocuments = await collection.aggregate([{ $sample: { size: 1 } }]).toArray();
+    const document = randomDocuments?.[0];
     if (!document) return;
 
     return this.mapToRecipe(document);

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.1](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-kitchen-v0.12.0...restaurant-kitchen-v0.12.1) (2024-01-27)
+
+
+### Bug Fixes
+
+* correcting handling of orders in ToDo status ([c02db03](https://github.com/soymichelt/restaurant-microservices/commit/c02db03b77fad4570dbfb099a9210787f7b4c652))
+
 ## [0.12.0](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-kitchen-v0.11.2...restaurant-kitchen-v0.12.0) (2024-01-26)
 
 

@@ -3,5 +3,6 @@ import { IngredientId } from '@services/ingredients/domain/valueObjects/ingredie
 
 export interface IngredientRepository {
   all(ingredientIds?: IngredientId[]): Promise<Ingredient[]>;
+  find(ingredientId: IngredientId): Promise<Ingredient>;
   update(ingredient: Ingredient): Promise<void>;
 }

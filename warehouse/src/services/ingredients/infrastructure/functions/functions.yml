@@ -10,6 +10,18 @@ ingredients-get-all:
         method: GET
         path: /warehouse/ingredients
 
+ingredients-get:
+  role: IamWarehouseLambdaAccessRole
+  handler: src/services/ingredients/infrastructure/functions/http/get/handler.handler
+  maximumRetryAttempts: 0
+  environment:
+    MONGO_DATABASE_URI: ${ssm:/restaurant-warehouse/databases/MONGO_URI}
+    MONGO_DATABASE_NAME: ${ssm:/restaurant-warehouse/databases/MONGO_NAME}
+  events:
+    - httpApi:
+        method: GET
+        path: /warehouse/ingredients/{ingredientId}
+
 ingredients-order-stock:
   role: IamWarehouseLambdaAccessRole
   handler: src/services/ingredients/infrastructure/functions/http/orderStock/handler.handler

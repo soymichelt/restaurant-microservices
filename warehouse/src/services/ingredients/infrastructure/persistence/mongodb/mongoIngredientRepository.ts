@@ -22,6 +22,14 @@ export class MongoIngredientRepository extends MongoRepository<Ingredient> imple
     return documents.map((document) => this.mapToIngredient(document));
   }
 
+  public async find(ingredientId: IngredientId): Promise<Ingredient> {
+    const collection = await this.collection();
+    const document = await collection.findOne({ _id: ingredientId.value });
+    if (!document) return;
+
+    return this.mapToIngredient(document);
+  }
+
   public async update(ingredient: Ingredient): Promise<void> {
     await this.persist(ingredient.ingredientId, ingredient);
   }

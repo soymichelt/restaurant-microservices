@@ -5,7 +5,6 @@ import { RecipeNotFoundException } from '@services/orders/domain/exceptions/reci
 import { OrderRepository } from '@services/orders/domain/repositories/orderRepository';
 import { OrderIngredientsService } from '@services/orders/domain/services/orderIngredientsService';
 import { RecipeRepository } from '@services/recipes/domain/repositories/recipeRepository';
-import { EventBus } from '@shared/domain/events/eventBus';
 import { UseCase } from '@shared/domain/useCases/useCase';
 import { OrderId } from '@shared/domain/valueObjects/orderId';
 import { inject, injectable } from 'tsyringe';
@@ -16,7 +15,6 @@ export class PrepareOrderUseCase extends UseCase<PrepareOrderRequest, void> {
     @inject('OrderRepository') private repository: OrderRepository,
     @inject('RecipeRepository') private recipeRepository: RecipeRepository,
     @inject('OrderIngredientsService') private service: OrderIngredientsService,
-    @inject('EventBus') private eventBus: EventBus,
   ) {
     super();
   }
@@ -38,8 +36,6 @@ export class PrepareOrderUseCase extends UseCase<PrepareOrderRequest, void> {
 
     const orderIsDelivered = await this.service.orderIngredients(ingredients);
     if (!orderIsDelivered) {
-      order.requestOrderAgain();
-      await this.eventBus.publish(order.pullEvents());
       return;
     }
 

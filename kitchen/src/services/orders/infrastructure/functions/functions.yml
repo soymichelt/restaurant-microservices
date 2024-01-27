@@ -23,14 +23,15 @@ order-create:
         method: POST
         path: /kitchen/orders
 
-order-prepare-sqs:
+order-prepare:
   role: IamRestaurantKitchenLambdaAccessRole
   handler: src/services/orders/infrastructure/functions/sqs/prepare/handler.handler
   maximumRetryAttempts: 0
+  provisionedConcurrency: 1
+  reservedConcurrency: 1
   environment:
     MONGO_DATABASE_URI: ${ssm:/restaurant-kitchen/databases/MONGO_URI}
     MONGO_DATABASE_NAME: ${ssm:/restaurant-kitchen/databases/MONGO_NAME}
-    SQS_URL: !Ref EventBusSqsRestaurantKitchenQueue
     LAMBDA_ORDER_INGREDIENTS_STOCK: ${self:custom.environment.RESTAURANT_WAREHOUSE.LAMBDA_ORDER_INGREDIENTS_STOCK}
   events:
     - sqs:
@@ -44,6 +45,7 @@ order-move-to-next-state:
   maximumRetryAttempts: 0
   environment:
     SNS_TOPIC_ARN: !Ref EventBusSnsRestaurantKitchenTopic
+    SQS_URL: !Ref EventBusSqsRestaurantKitchenQueue
     MONGO_DATABASE_URI: ${ssm:/restaurant-kitchen/databases/MONGO_URI}
     MONGO_DATABASE_NAME: ${ssm:/restaurant-kitchen/databases/MONGO_NAME}
   events:

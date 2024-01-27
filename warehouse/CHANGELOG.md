@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/soymichelt/restaurant-microservices/compare/warehouse-v0.6.0...warehouse-v0.7.0) (2024-01-27)
+
+
+### Features
+
+* add get ingredient use case ([821e890](https://github.com/soymichelt/restaurant-microservices/commit/821e890e0bbe04fda501f9e8f9e4bbde97abeae3))
+
 ## [0.6.0](https://github.com/soymichelt/restaurant-microservices/compare/warehouse-v0.5.1...warehouse-v0.6.0) (2024-01-26)
 
 

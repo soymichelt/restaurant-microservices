@@ -52,7 +52,7 @@ if (process.env.SNS_TOPIC_ARN) {
 }
 
 if (process.env.SQS_URL) {
-  container.register<EventBus>('EventBus', {
+  container.register<EventBus>('EventBusQueue', {
     useValue: new EventBusSqs({
       serviceName: `${process.env.APP}.${process.env.SERVICE}`,
       version: process.env.EVENT_BUS_VERSION,

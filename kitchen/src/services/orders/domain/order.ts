@@ -105,7 +105,15 @@ export class Order extends AggregateRoot {
     this.changeState(newState);
   }
 
+  public isTodo(): boolean {
+    return this._state.isTodo();
+  }
+
   public requestOrderAgain(): void {
+    const timeAgo = this.calculateTimeAgoInSeconds();
+    if (timeAgo < 30) return;
+
+    this.updatedAt = DateValueObject.now();
     const event = OrderCreatedEvent.build(this);
     this.pushEvent(event);
   }
@@ -127,5 +135,11 @@ export class Order extends AggregateRoot {
     this._state = newState;
     const event = OrderStateUpdatedEvent.build(this, prevState);
     this.pushEvent(event);
+  }
+
+  private calculateTimeAgoInSeconds(): number {
+    const difference = Math.abs(new Date().getTime() - this.updatedAt.value.getTime());
+    const differenceInSeconds = Math.floor(difference / 1000);
+    return differenceInSeconds;
   }
 }

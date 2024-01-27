@@ -14,7 +14,7 @@ export class CreateOrderUseCase extends UseCase<void, OrderResponse> {
   constructor(
     @inject('OrderRepository') private orderRepository: OrderRepository,
     @inject('RecipeRepository') private recipeRepository: RecipeRepository,
-    @inject('EventBus') private eventBus: EventBus,
+    @inject('EventBusQueue') private eventBus: EventBus,
   ) {
     super();
   }

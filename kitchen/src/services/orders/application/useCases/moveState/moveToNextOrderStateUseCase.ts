@@ -12,6 +12,7 @@ export class MoveToNextOrderStateUseCase extends UseCase<MoveToNextOrderStateReq
   constructor(
     @inject('OrderRepository') private repository: OrderRepository,
     @inject('EventBus') private eventBus: EventBus,
+    @inject('EventBusQueue') private eventBusQueue: EventBus,
   ) {
     super();
   }
@@ -22,6 +23,13 @@ export class MoveToNextOrderStateUseCase extends UseCase<MoveToNextOrderStateReq
     const order = await this.repository.find(orderId);
     if (!order) {
       throw new OrderNotFoundException(orderId);
+    }
+
+    if (order.isTodo()) {
+      order.requestOrderAgain();
+
+      await this.eventBusQueue.publish(order.pullEvents());
+      return order.toPrimitives();
     }
 
     order.markAsNextState();

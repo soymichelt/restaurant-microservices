@@ -9,6 +9,7 @@ export const ERROR_CODES = {
   UnauthorizedException: 'SHA-1006',
   IdInvalidException: 'SHA-1007',
   IntegerInvalidException: 'SHA-1008',
-  // WRH-200*: Warehouse inventory module error codes
-  IngredientStockInvalidException: 'WRH-2001',
+  // ING-200*: Warehouse inventory module error codes
+  IngredientStockInvalidException: 'ING-2001',
+  IngredientNotFoundException: 'ING-2002',
 };

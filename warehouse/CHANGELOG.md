@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.1](https://github.com/soymichelt/restaurant-microservices/compare/warehouse-v0.7.0...warehouse-v0.7.1) (2024-01-27)
+
+
+### Bug Fixes
+
+* correcting handling of orders in ToDo status ([c02db03](https://github.com/soymichelt/restaurant-microservices/commit/c02db03b77fad4570dbfb099a9210787f7b4c652))
+
 ## [0.7.0](https://github.com/soymichelt/restaurant-microservices/compare/warehouse-v0.6.0...warehouse-v0.7.0) (2024-01-27)
 
 

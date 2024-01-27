@@ -1,6 +1,6 @@
 {
   "name": "warehouse",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Restaurant warehouse microservices - Manage inventory",
   "scripts": {
     "lint": "eslint --color ./src/**/*.ts && tsc --noEmit",

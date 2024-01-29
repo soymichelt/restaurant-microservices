@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.0](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-kitchen-v0.12.1...restaurant-kitchen-v0.13.0) (2024-01-29)
+
+
+### Features
+
+* add check orders use case ([fc2a7bf](https://github.com/soymichelt/restaurant-microservices/commit/fc2a7bf9fe862e1d47fc519fa286c2874dfcf090))
+
 ## [0.12.1](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-kitchen-v0.12.0...restaurant-kitchen-v0.12.1) (2024-01-27)
 
 

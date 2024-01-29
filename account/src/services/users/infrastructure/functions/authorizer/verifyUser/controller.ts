@@ -61,6 +61,10 @@ export class VerifyIfAuthorizedController extends BaseController<
     }
   }
 
+  protected override generateSuccessResult(response: AuthorizerLambdaIamResponse): BaseResponseType {
+    return response;
+  }
+
   protected override generateErrorResult(error: DomainException): BaseResponseType {
     this.logger.error({
       ...(error.toPrimitives ? error.toPrimitives() : error),

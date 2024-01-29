@@ -89,3 +89,18 @@ user-authorizer:
     JWT_PRIVATE_KEY: ${ssm:/restaurant-account/jwt/PRIVATE_KEY}
     MONGO_DATABASE_URI: ${ssm:/restaurant-account/databases/MONGO_URI}
     MONGO_DATABASE_NAME: ${ssm:/restaurant-account/databases/MONGO_NAME}
+
+user-refresh-token:
+  role: IamRestaurantAccountLambdaAccessRole
+  handler: src/services/users/infrastructure/functions/http/refreshToken/handler.handler
+  environment:
+    JWT_PRIVATE_KEY: ${ssm:/restaurant-account/jwt/PRIVATE_KEY}
+    MONGO_DATABASE_URI: ${ssm:/restaurant-account/databases/MONGO_URI}
+    MONGO_DATABASE_NAME: ${ssm:/restaurant-account/databases/MONGO_NAME}
+  events:
+    - httpApi:
+        method: POST
+        path: /account/users/refreshToken
+        authorizer:
+          id: ${cf:restaurant-core-${self:provider.stage}.RestaurantCoreApiGatewayV2AuthorizerId}
+          type: request

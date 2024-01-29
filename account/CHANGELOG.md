@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.0](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-account-v0.4.0...restaurant-account-v0.5.0) (2024-01-29)
+
+
+### Features
+
+* add userId value object ([fe24b4f](https://github.com/soymichelt/restaurant-microservices/commit/fe24b4f0977ea0f14abcd7af46142d556b3618b3))
+* add verify user token use case ([5d31baf](https://github.com/soymichelt/restaurant-microservices/commit/5d31baf72984aa00f60d8e7480fa96e0c36d9dd9))
+
 ## [0.4.0](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-account-v0.3.1...restaurant-account-v0.4.0) (2024-01-26)
 
 

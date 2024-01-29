@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.0](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-kitchen-v0.13.0...restaurant-kitchen-v0.14.0) (2024-01-29)
+
+
+### Features
+
+* add filter by range to GetAllOrdersUseCase ([f6964d6](https://github.com/soymichelt/restaurant-microservices/commit/f6964d6a3d8919f8ea0b5d4dc6e051d29bb01035))
+
 ## [0.13.0](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-kitchen-v0.12.1...restaurant-kitchen-v0.13.0) (2024-01-29)
 
 

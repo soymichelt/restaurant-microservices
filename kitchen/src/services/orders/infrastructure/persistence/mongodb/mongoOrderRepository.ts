@@ -1,5 +1,7 @@
+/* eslint-disable security/detect-non-literal-regexp */
 import { Order } from '@services/orders/domain/order';
 import { OrderRepository } from '@services/orders/domain/repositories/orderRepository';
+import { DateRange } from '@shared/domain/valueObjects/dateRangeValueObject';
 import { OrderId } from '@shared/domain/valueObjects/orderId';
 import { MongoRepository } from '@shared/infrastructure/persistence/mongodb/mongoRepository';
 import { injectable } from 'tsyringe';
@@ -12,11 +14,21 @@ export class MongoOrderRepository extends MongoRepository<Order> implements Orde
     super({ collectionName: ORDER_COLLECTION });
   }
 
-  public async all(orderIds?: OrderId[]): Promise<Order[]> {
+  public async all(orderIds?: OrderId[], range?: DateRange): Promise<Order[]> {
     const collection = await this.collection();
-    const filter = !orderIds ? {} : { _id: { $in: orderIds.map((orderId) => orderId.value) } };
+    const andFilters = [];
 
-    const documents = await collection.find(filter).toArray();
+    if (orderIds) {
+      andFilters.push({ _id: { $in: orderIds.map((orderId) => orderId.value) } });
+    }
+    if (range?.isToday()) {
+      andFilters.push({ createdAt: { $regex: DateRange.getTodayRegex() } });
+    }
+    if (range?.isMonth()) {
+      andFilters.push({ createdAt: { $regex: DateRange.getMonthRegex() } });
+    }
+
+    const documents = await collection.find(andFilters.length ? { $and: andFilters } : {}).toArray();
     if (!documents || !documents.length) return [];
 
     return documents.map((document) => this.mapToOrder(document));

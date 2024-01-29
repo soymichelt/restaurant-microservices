@@ -7,6 +7,7 @@ import { AuthorizerRequestParserController } from '@shared/infrastructure/contro
 import { HttpRequestParserController } from '@shared/infrastructure/controllers/httpRequestParserController';
 import { ManagerRequestParsersController } from '@shared/infrastructure/controllers/managerRequestParsersController';
 import { RequestParserController } from '@shared/infrastructure/controllers/requestParserController';
+import { ScheduleRequestParserController } from '@shared/infrastructure/controllers/scheduleRequestParserController';
 import { SnsRequestParserController } from '@shared/infrastructure/controllers/snsRequestParserController';
 import { SqsRequestParserController } from '@shared/infrastructure/controllers/sqsRequestParserController';
 import { EventBusSns } from '@shared/infrastructure/events/eventBusSns';
@@ -22,6 +23,7 @@ container
   .register<RequestParserController>('RequestParserController', AuthorizerRequestParserController)
   .register<RequestParserController>('RequestParserController', SnsRequestParserController)
   .register<RequestParserController>('RequestParserController', SqsRequestParserController)
+  .register<RequestParserController>('RequestParserController', ScheduleRequestParserController)
   .register<ManagerRequestParsersController>('ManagerRequestParsersController', ManagerRequestParsersController)
   .register<Logger>('Logger', {
     useValue: new WinstonLogger({

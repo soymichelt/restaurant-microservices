@@ -1,6 +1,6 @@
 {
   "core": "0.1.0",
   "account": "0.4.0",
-  "kitchen": "0.12.1",
+  "kitchen": "0.13.0",
   "warehouse": "0.7.1"
 }

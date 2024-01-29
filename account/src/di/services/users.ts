@@ -5,7 +5,9 @@ import { NotifyUserRemovedUseCase } from '@services/users/application/useCases/n
 import { RemoveUserUseCase } from '@services/users/application/useCases/remove/removeUserUseCase';
 import { SigninUseCase } from '@services/users/application/useCases/signin/signinUseCase';
 import { SingupUserUseCase } from '@services/users/application/useCases/signup/singupUserUseCase';
+import { VerifyUserTokenUseCase } from '@services/users/application/useCases/verifyUser/verifyUserTokenUseCase';
 import { UserRepository } from '@services/users/domain/repositories/userRepository';
+import { VerifyIfAuthorizedController } from '@services/users/infrastructure/functions/authorizer/verifyUser/controller';
 import { GetAllUsersController } from '@services/users/infrastructure/functions/http/getAll/controller';
 import { RemoveUserController } from '@services/users/infrastructure/functions/http/remove/controller';
 import { SigninController } from '@services/users/infrastructure/functions/http/signin/controller';
@@ -27,6 +29,8 @@ container
   .register<SigninUseCase>('SigninUseCase', SigninUseCase)
   .register<SigninController>('SigninController', SigninController)
   .register<SingupUserUseCase>('SingupUserUseCase', SingupUserUseCase)
-  .register<SignupUserController>('SignupUserController', SignupUserController);
+  .register<SignupUserController>('SignupUserController', SignupUserController)
+  .register<VerifyUserTokenUseCase>('VerifyUserTokenUseCase', VerifyUserTokenUseCase)
+  .register<VerifyIfAuthorizedController>('VerifyIfAuthorizedController', VerifyIfAuthorizedController);
 
 export { container };

@@ -1,4 +1,5 @@
 import { container } from '@di/shared';
+import { CheckOrdersUseCase } from '@services/orders/application/useCases/checkOrders/checkOrdersUseCase';
 import { CreateOrderUseCase } from '@services/orders/application/useCases/create/createOrderUseCase';
 import { GetAllOrdersUseCase } from '@services/orders/application/useCases/getAll/getAllOrdersUseCase';
 import { MoveToNextOrderStateUseCase } from '@services/orders/application/useCases/moveState/moveToNextOrderStateUseCase';
@@ -7,6 +8,7 @@ import { UpdateOrderNotesUseCase } from '@services/orders/application/useCases/u
 import { UpdateOrderStateUseCase } from '@services/orders/application/useCases/updateState/updateOrderStateUseCase';
 import { OrderRepository } from '@services/orders/domain/repositories/orderRepository';
 import { OrderIngredientsService } from '@services/orders/domain/services/orderIngredientsService';
+import { CheckOrdersController } from '@services/orders/infrastructure/functions/cronjobs/checkOrders/controller';
 import { CreateOrderController } from '@services/orders/infrastructure/functions/http/create/controller';
 import { GetAllOrdersController } from '@services/orders/infrastructure/functions/http/getAll/controller';
 import { MoveToNextOrderStateController } from '@services/orders/infrastructure/functions/http/moveState/controller';
@@ -33,6 +35,8 @@ container
   .register<UpdateOrderStateUseCase>('UpdateOrderStateUseCase', UpdateOrderStateUseCase)
   .register<UpdateOrderStateController>('UpdateOrderStateController', UpdateOrderStateController)
   .register<UpdateOrderNotesUseCase>('UpdateOrderNotesUseCase', UpdateOrderNotesUseCase)
-  .register<UpdateOrderNotesController>('UpdateOrderNotesController', UpdateOrderNotesController);
+  .register<UpdateOrderNotesController>('UpdateOrderNotesController', UpdateOrderNotesController)
+  .register<CheckOrdersUseCase>('CheckOrdersUseCase', CheckOrdersUseCase)
+  .register<CheckOrdersController>('CheckOrdersController', CheckOrdersController);
 
 export { container };

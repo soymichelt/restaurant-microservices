@@ -78,3 +78,14 @@ order-update-notes:
     - httpApi:
         method: PATCH
         path: /kitchen/orders/{orderId}/notes
+
+order-checks:
+  role: IamRestaurantKitchenLambdaAccessRole
+  handler: src/services/orders/infrastructure/functions/cronjobs/checkOrders/handler.handler
+  maximumRetryAttempts: 0
+  environment:
+    MONGO_DATABASE_URI: ${ssm:/restaurant-kitchen/databases/MONGO_URI}
+    MONGO_DATABASE_NAME: ${ssm:/restaurant-kitchen/databases/MONGO_NAME}
+    SQS_URL: !Ref EventBusSqsRestaurantKitchenQueue
+  events:
+    - schedule: rate(10 minutes)

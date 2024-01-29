@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-account-v0.5.0...restaurant-account-v0.6.0) (2024-01-29)
+
+
+### Features
+
+* add refresh token use case ([fb8668e](https://github.com/soymichelt/restaurant-microservices/commit/fb8668e9b677b32ee8b7364f427faf7c7329a5e1))
+
 ## [0.5.0](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-account-v0.4.0...restaurant-account-v0.5.0) (2024-01-29)
 
 

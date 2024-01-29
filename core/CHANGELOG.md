@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-core-v0.1.0...restaurant-core-v0.2.0) (2024-01-29)
+
+
+### Features
+
+* add verify user token use case ([5d31baf](https://github.com/soymichelt/restaurant-microservices/commit/5d31baf72984aa00f60d8e7480fa96e0c36d9dd9))
+
 ## [0.1.0](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-core-v0.0.2...restaurant-core-v0.1.0) (2024-01-26)
 
 

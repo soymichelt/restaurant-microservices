@@ -61,7 +61,6 @@ provider:
 
 functions:
   - ${file(src/services/ping/infrastructure/functions/functions.yml)}
-  - ${file(src/services/auth/infrastructure/functions/functions.yml)}
   - ${file(src/services/users/infrastructure/functions/functions.yml)}
 
 resources:

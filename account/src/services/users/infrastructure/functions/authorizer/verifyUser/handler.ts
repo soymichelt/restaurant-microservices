@@ -1,6 +1,6 @@
-import { container } from '@di/services/auth';
+import { container } from '@di/services/users';
 import middy from '@middy/core';
-import { VerifyIfAuthorizedController } from '@services/auth/infrastructure/functions/http/verify/controller';
+import { VerifyIfAuthorizedController } from '@services/users/infrastructure/functions/authorizer/verifyUser/controller';
 import { APIGatewayRequestAuthorizerEvent, Context } from 'aws-lambda';
 
 const invokeController = async function (event: APIGatewayRequestAuthorizerEvent, context: Context) {

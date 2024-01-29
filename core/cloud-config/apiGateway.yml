@@ -33,9 +33,30 @@ Resources:
           - !Ref RestaurantCoreApiGatewayV2
           - 'access-logs'
 
+  RestaurantCoreApiGatewayV2Authorizer:
+    Type: AWS::ApiGatewayV2::Authorizer
+    Properties:
+      Name: RestaurantCoreApiRequestAuthorizer
+      ApiId: !Ref RestaurantCoreApiGatewayV2
+      AuthorizerType: REQUEST
+      AuthorizerPayloadFormatVersion: '2.0'
+      AuthorizerResultTtlInSeconds: 300
+      EnableSimpleResponses: false
+      AuthorizerUri:
+        Fn::Sub: 'arn:aws:apigateway:${self:custom.constants.REGION}:lambda:path/2015-03-31/functions/${self:custom.environment.RESTAURANT_ACCOUNT.AUTH_LAMBDA_REQUEST_AUTHORIZER}/invocations'
+      IdentitySource:
+        - '$request.header.Authorization'
+      AuthorizerCredentialsArn:
+        Fn::GetAtt: [IamRestaurantCoreLambdaAuthorizerInvokeRole, Arn]
+
 Outputs:
   RestaurantCoreApiGatewayV2Id:
     Value:
       Fn::GetAtt: [RestaurantCoreApiGatewayV2, ApiId]
     Export:
       Name: ${self:service}-RestaurantCoreApiGatewayV2-ApiId
+  RestaurantCoreApiGatewayV2AuthorizerId:
+    Value:
+      Ref: RestaurantCoreApiGatewayV2Authorizer
+    Export:
+      Name: ${self:service}-${self:provider.stage}-RestaurantCoreApiGatewayV2Authorizer-AuthorizerId

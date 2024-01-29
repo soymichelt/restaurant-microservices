@@ -1,18 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { VerifyIfAuthorizedUseCase } from '@services/auth/application/useCases/verify/verifyIfAuthorizedUseCase';
-import { UserRoleVerificationTypeEnum } from '@services/auth/domain/valueObjects/userRoleVerification';
+import { VerifyUserTokenUseCase } from '@services/users/application/useCases/verifyUser/verifyUserTokenUseCase';
 import { DomainException } from '@shared/domain/exceptions/baseException';
 import { UnauthorizedException } from '@shared/domain/exceptions/unauthorizedException';
 import { BaseController } from '@shared/infrastructure/controllers/baseController';
 import { BaseResponseType } from '@shared/infrastructure/controllers/responses/baseResponseType';
-import { Context } from 'aws-lambda';
 import { inject, injectable } from 'tsyringe';
 
 type VerifyIfAuthorizedControllerRequest = {
   routeArn: string;
   headers: {
-    'x-user-id': string;
-    'x-auth-token': string;
+    authorization: string;
   };
 };
 
@@ -38,40 +35,36 @@ export class VerifyIfAuthorizedController extends BaseController<
   VerifyIfAuthorizedControllerRequest,
   AuthorizerLambdaIamResponse
 > {
-  constructor(@inject('VerifyIfAuthorizedUseCase') private useCase: VerifyIfAuthorizedUseCase) {
+  constructor(@inject('VerifyUserTokenUseCase') private useCase: VerifyUserTokenUseCase) {
     super();
   }
 
-  public async run(
-    request: VerifyIfAuthorizedControllerRequest,
-    context: Context,
-  ): Promise<AuthorizerLambdaIamResponse> {
-    const { 'x-user-id': userId, 'x-auth-token': token } = request.headers;
-    const response = await this.useCase.run({
-      userId,
-      token,
-      role: context.functionName,
-    });
+  public async run(request: VerifyIfAuthorizedControllerRequest): Promise<AuthorizerLambdaIamResponse> {
+    try {
+      const { authorization: token } = request.headers;
+      const result = await this.useCase.run({
+        token: token?.replace('Bearer ', ''),
+      });
 
-    if (response.verificationType === UserRoleVerificationTypeEnum.unauthorized) {
-      throw new UnauthorizedException(userId);
+      if (!result) {
+        throw new UnauthorizedException();
+      }
+
+      return this.generatePolicyDocument(result.userId, 'Allow', request.routeArn, result);
+    } catch (error) {
+      if (error instanceof DomainException) {
+        const userId = error.metadata.userId as string;
+        return this.generatePolicyDocument(userId, 'Deny', request.routeArn);
+      }
+
+      throw error;
     }
-
-    return this.generatePolicyDocument(userId, response.verificationType, request.routeArn, response.auth);
-  }
-
-  protected override generateSuccessResult(response: AuthorizerLambdaIamResponse): BaseResponseType {
-    this.logger.info({
-      message: 'generateSuccessResult >>>> ',
-      response,
-    });
-
-    return response;
   }
 
   protected override generateErrorResult(error: DomainException): BaseResponseType {
     this.logger.error({
       ...(error.toPrimitives ? error.toPrimitives() : error),
+      name: error.name,
       stack: error.stack,
       message: error.message,
     });

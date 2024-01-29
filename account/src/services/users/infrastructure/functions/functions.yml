@@ -38,6 +38,9 @@ user-get-all:
     - httpApi:
         method: GET
         path: /account/users
+        authorizer:
+          id: ${cf:restaurant-core-${self:provider.stage}.RestaurantCoreApiGatewayV2AuthorizerId}
+          type: request
 
 user-remove:
   role: IamRestaurantAccountLambdaAccessRole
@@ -78,3 +81,11 @@ user-signin:
     - httpApi:
         method: POST
         path: /account/users/signin
+
+user-authorizer:
+  role: IamRestaurantAccountLambdaAccessRole
+  handler: src/services/users/infrastructure/functions/authorizer/verifyUser/handler.handler
+  environment:
+    JWT_PRIVATE_KEY: ${ssm:/restaurant-account/jwt/PRIVATE_KEY}
+    MONGO_DATABASE_URI: ${ssm:/restaurant-account/databases/MONGO_URI}
+    MONGO_DATABASE_NAME: ${ssm:/restaurant-account/databases/MONGO_NAME}

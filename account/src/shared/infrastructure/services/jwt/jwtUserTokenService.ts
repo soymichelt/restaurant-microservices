@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ArgRequiredException } from '@shared/domain/exceptions/argRequiredException';
+import { TokenHasExpiredException } from '@shared/domain/exceptions/tokenHasExpiredException';
 import { UserTokenDecodeException } from '@shared/domain/exceptions/userTokenDecodeException';
 import { UserTokenEncodeException } from '@shared/domain/exceptions/userTokenEncodeException';
 import { UserPayloadProps, UserTokenService } from '@shared/domain/services/userTokenService';
@@ -22,7 +23,7 @@ export class JwtUserTokenService implements UserTokenService {
 
   public async encode(payload: UserPayloadProps): Promise<string> {
     const promise = new Promise<string>((resolve, reject) => {
-      const expiration = 60 * 60 * 24;
+      const expiration = 60 * 5; // 5 minutos
 
       jwt.sign(
         {
@@ -53,11 +54,22 @@ export class JwtUserTokenService implements UserTokenService {
           reject(new UserTokenDecodeException(error));
         }
 
+        if (this.verifyIfTokenHasExpired(result.exp)) {
+          reject(new TokenHasExpiredException(result.payload?.userId));
+        }
+
         return resolve(result.payload as UserPayloadProps);
       });
     });
 
     return promise;
+  }
+
+  private verifyIfTokenHasExpired(exp: number): boolean {
+    const expirationDate = new Date(exp * 1000);
+    const currentDate = new Date();
+
+    return currentDate > expirationDate;
   }
 
   private validateJwtUserTokenService(props: JwtUserTokenServiceProps): void {

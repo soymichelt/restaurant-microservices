@@ -53,4 +53,10 @@ describe('Tests JwtUserTokenService', () => {
     const payloadFromTokenDecoded = await jwtService.verifyAndDecode(token);
     expect(payloadFromTokenDecoded).toEqual(PAYLOAD);
   });
+
+  // test('Testing token expired', async () => {
+  //   const jwtService = new JwtUserTokenService({ privateKey: PRIVATE_KEY });
+  //   const token = `eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJJZCI6IjEyMzQ1IiwiZW1haWwiOiJzb3ltaWNoZWwuZGV2QGdtYWlsLmNvbSIsInVzZXJuYW1lIjoiU295bWljaGVsRGV2IiwicGhvbmUiOiI4ODg4LTg4ODgiLCJjcmVhdGVkQXQiOiIyMDI0LTAxLTI4VDA3OjIzOjE5LjYzOFoiLCJ1cGRhdGVkQXQiOiIyMDI0LTAxLTI4VDA3OjIzOjE5LjYzOFoifSwiaWF0IjoxNzA2NDI2NTk5LCJleHAiOjE3MDY1MTI5OTl9.xRKVndShvp3NRsLqdulJdU-vEEig7TtWQzLmKAFN-tXnSU0EHKdZDhYEPJEiXeFDB4sgMBHyfRBSWuR35BOaTaXaL6excPzHwMMDNWAg0BZ9ckNkQ1XYBQoyA_RsJg5E2-0q8TEhZ9nke_fuMf_71jbUvdhvtDEHSLkXMxoMS7_3dSEMaSIFC_drc625vvohElXSa7GNz1EdWt8U-rohJY2izplD2CPmxQ8svWWeCQpLkhWiq7ppVdftFzDJYh7MW6-9N0M5YLK_U1jtIZq7YaYS1Bz-nKZFYSWVzxRzXn76M1gxDxX-Q8OWv_y6pM1W5yhGbRRTe-XhHWn0ebbOOw`;
+  //   await expect(jwtService.verifyAndDecode(token)).rejects.toThrow('Token has expired3');
+  // });
 });

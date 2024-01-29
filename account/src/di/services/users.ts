@@ -2,6 +2,7 @@ import { container } from '@di/shared';
 import { GetAllUsersUseCase } from '@services/users/application/useCases/all/getAllUsersUseCase';
 import { NotifyUserRegisteredUseCase } from '@services/users/application/useCases/notifRegistered/notifyUserRegistedUseCase';
 import { NotifyUserRemovedUseCase } from '@services/users/application/useCases/notifRemoved/notifyUserRemovedUseCase';
+import { RefreshUserTokenUseCase } from '@services/users/application/useCases/refreshToken/refreshUserTokenUseCase';
 import { RemoveUserUseCase } from '@services/users/application/useCases/remove/removeUserUseCase';
 import { SigninUseCase } from '@services/users/application/useCases/signin/signinUseCase';
 import { SingupUserUseCase } from '@services/users/application/useCases/signup/singupUserUseCase';
@@ -9,6 +10,7 @@ import { VerifyUserTokenUseCase } from '@services/users/application/useCases/ver
 import { UserRepository } from '@services/users/domain/repositories/userRepository';
 import { VerifyIfAuthorizedController } from '@services/users/infrastructure/functions/authorizer/verifyUser/controller';
 import { GetAllUsersController } from '@services/users/infrastructure/functions/http/getAll/controller';
+import { RefreshUserTokenController } from '@services/users/infrastructure/functions/http/refreshToken/controller';
 import { RemoveUserController } from '@services/users/infrastructure/functions/http/remove/controller';
 import { SigninController } from '@services/users/infrastructure/functions/http/signin/controller';
 import { SignupUserController } from '@services/users/infrastructure/functions/http/signup/controller';
@@ -31,6 +33,8 @@ container
   .register<SingupUserUseCase>('SingupUserUseCase', SingupUserUseCase)
   .register<SignupUserController>('SignupUserController', SignupUserController)
   .register<VerifyUserTokenUseCase>('VerifyUserTokenUseCase', VerifyUserTokenUseCase)
-  .register<VerifyIfAuthorizedController>('VerifyIfAuthorizedController', VerifyIfAuthorizedController);
+  .register<VerifyIfAuthorizedController>('VerifyIfAuthorizedController', VerifyIfAuthorizedController)
+  .register<RefreshUserTokenUseCase>('RefreshUserTokenUseCase', RefreshUserTokenUseCase)
+  .register<RefreshUserTokenController>('RefreshUserTokenController', RefreshUserTokenController);
 
 export { container };

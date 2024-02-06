@@ -104,3 +104,13 @@ user-refresh-token:
         authorizer:
           id: ${cf:restaurant-core-${self:provider.stage}.RestaurantCoreApiGatewayV2AuthorizerId}
           type: request
+
+user-identity-get:
+  role: IamRestaurantAccountLambdaAccessRole
+  handler: src/services/users/infrastructure/functions/http/getIdentity/handler.handler
+  environment:
+    ABLY_API_KEY: ${ssm:/restaurant-account/ably/ABLY_API_KEY}
+  events:
+    - httpApi:
+        method: GET
+        path: /account/users/identity/{userId}

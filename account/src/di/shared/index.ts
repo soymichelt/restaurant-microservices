@@ -3,6 +3,7 @@ import 'reflect-metadata';
 import { EventBus } from '@shared/domain/events/eventBus';
 import { Logger } from '@shared/domain/loggers/logger';
 import { EncriptionService } from '@shared/domain/services/encriptionService';
+import { GetIdentityService } from '@shared/domain/services/getIdentityService';
 import { KeyStoreService } from '@shared/domain/services/keyStoreService';
 import { MailingService } from '@shared/domain/services/mailingService';
 import { SmsService } from '@shared/domain/services/smsService';
@@ -16,6 +17,7 @@ import { EventBusSns } from '@shared/infrastructure/events/eventBusSns';
 import { WinstonLogger } from '@shared/infrastructure/loggers/winston/winstonLogger';
 import { MongoClientFactory } from '@shared/infrastructure/persistence/mongodb/mongoClientFactory';
 import { CryptoEncriptionService } from '@shared/infrastructure/services/encription/cryptoEncriptionService';
+import { GetIdentityServiceAbly } from '@shared/infrastructure/services/getIdentity/getIdentityService';
 import { JwtUserTokenService } from '@shared/infrastructure/services/jwt/jwtUserTokenService';
 import { SsmKeyStoreService } from '@shared/infrastructure/services/keyStore/ssmKeyStoreService';
 import { SesMailingService } from '@shared/infrastructure/services/mailing/sesMailingService';
@@ -94,6 +96,14 @@ if (process.env.JWT_PRIVATE_KEY) {
   container.register<UserTokenService>('UserTokenService', {
     useValue: new JwtUserTokenService({
       privateKey: process.env.JWT_PRIVATE_KEY?.toString().trim(),
+    }),
+  });
+}
+
+if (process.env.ABLY_API_KEY) {
+  container.register<GetIdentityService>('GetIdentityService', {
+    useValue: new GetIdentityServiceAbly({
+      apiKey: process.env.ABLY_API_KEY,
     }),
   });
 }

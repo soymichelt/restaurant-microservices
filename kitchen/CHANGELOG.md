@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.15.0](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-kitchen-v0.14.0...restaurant-kitchen-v0.15.0) (2024-02-06)
+
+
+### Features
+
+* update schedule rate expression ([5c3254e](https://github.com/soymichelt/restaurant-microservices/commit/5c3254e30969ddf07d3026e6e9158fd506959125))
+
 ## [0.14.0](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-kitchen-v0.13.0...restaurant-kitchen-v0.14.0) (2024-01-29)
 
 

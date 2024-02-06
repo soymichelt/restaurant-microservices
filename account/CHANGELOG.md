@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.7.0](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-account-v0.6.0...restaurant-account-v0.7.0) (2024-02-06)
+
+
+### Features
+
+* add ably dependency ([716e28c](https://github.com/soymichelt/restaurant-microservices/commit/716e28c89c079b2db920e5cb1b50803ac2eb344a))
+* add get identity domain service implemented with ably ([b24783b](https://github.com/soymichelt/restaurant-microservices/commit/b24783b728204ffd90681d117a4091a5bc906795))
+* add get identity use case ([a6fa702](https://github.com/soymichelt/restaurant-microservices/commit/a6fa7021b60b173d199d92dcc550af3580a40bbf))
+
 ## [0.6.0](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-account-v0.5.0...restaurant-account-v0.6.0) (2024-01-29)
 
 

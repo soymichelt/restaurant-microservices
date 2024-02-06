@@ -45,6 +45,7 @@ order-move-to-next-state:
   maximumRetryAttempts: 0
   environment:
     SNS_TOPIC_ARN: !Ref EventBusSnsRestaurantKitchenTopic
+    ABLY_API_KEY: ${ssm:/restaurant-kitchen/ably/ABLY_API_KEY}
     SQS_URL: !Ref EventBusSqsRestaurantKitchenQueue
     MONGO_DATABASE_URI: ${ssm:/restaurant-kitchen/databases/MONGO_URI}
     MONGO_DATABASE_NAME: ${ssm:/restaurant-kitchen/databases/MONGO_NAME}
@@ -88,4 +89,6 @@ order-checks:
     MONGO_DATABASE_NAME: ${ssm:/restaurant-kitchen/databases/MONGO_NAME}
     SQS_URL: !Ref EventBusSqsRestaurantKitchenQueue
   events:
-    - schedule: rate(10 minutes)
+    # Ejecutar cada 3 minutos de 10 AM a 9 PM, hora de Colombia, de lunes a domingo
+    - schedule:
+        rate: cron(0/3 15-2 ? * SUN-SAT *)

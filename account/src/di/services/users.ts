@@ -1,5 +1,6 @@
 import { container } from '@di/shared';
 import { GetAllUsersUseCase } from '@services/users/application/useCases/all/getAllUsersUseCase';
+import { GetIdentityUseCase } from '@services/users/application/useCases/getIdentity/getIdentityUseCase';
 import { NotifyUserRegisteredUseCase } from '@services/users/application/useCases/notifRegistered/notifyUserRegistedUseCase';
 import { NotifyUserRemovedUseCase } from '@services/users/application/useCases/notifRemoved/notifyUserRemovedUseCase';
 import { RefreshUserTokenUseCase } from '@services/users/application/useCases/refreshToken/refreshUserTokenUseCase';
@@ -10,6 +11,7 @@ import { VerifyUserTokenUseCase } from '@services/users/application/useCases/ver
 import { UserRepository } from '@services/users/domain/repositories/userRepository';
 import { VerifyIfAuthorizedController } from '@services/users/infrastructure/functions/authorizer/verifyUser/controller';
 import { GetAllUsersController } from '@services/users/infrastructure/functions/http/getAll/controller';
+import { GetIdentityController } from '@services/users/infrastructure/functions/http/getIdentity/controller';
 import { RefreshUserTokenController } from '@services/users/infrastructure/functions/http/refreshToken/controller';
 import { RemoveUserController } from '@services/users/infrastructure/functions/http/remove/controller';
 import { SigninController } from '@services/users/infrastructure/functions/http/signin/controller';
@@ -35,6 +37,8 @@ container
   .register<VerifyUserTokenUseCase>('VerifyUserTokenUseCase', VerifyUserTokenUseCase)
   .register<VerifyIfAuthorizedController>('VerifyIfAuthorizedController', VerifyIfAuthorizedController)
   .register<RefreshUserTokenUseCase>('RefreshUserTokenUseCase', RefreshUserTokenUseCase)
-  .register<RefreshUserTokenController>('RefreshUserTokenController', RefreshUserTokenController);
+  .register<RefreshUserTokenController>('RefreshUserTokenController', RefreshUserTokenController)
+  .register<GetIdentityUseCase>('GetIdentityUseCase', GetIdentityUseCase)
+  .register<GetIdentityController>('GetIdentityController', GetIdentityController);
 
 export { container };

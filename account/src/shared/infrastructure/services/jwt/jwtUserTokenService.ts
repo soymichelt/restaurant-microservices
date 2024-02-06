@@ -23,7 +23,7 @@ export class JwtUserTokenService implements UserTokenService {
 
   public async encode(payload: UserPayloadProps): Promise<string> {
     const promise = new Promise<string>((resolve, reject) => {
-      const expiration = 60 * 5; // 5 minutos
+      const expiration = '10m'; // 10 minutos
 
       jwt.sign(
         {

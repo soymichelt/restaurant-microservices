@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-account-v0.7.0...restaurant-account-v0.8.0) (2024-02-07)
+
+
+### Features
+
+* add lumigo config to account microsevice ([a3bac30](https://github.com/soymichelt/restaurant-microservices/commit/a3bac308afbf5b2aeee7347a5b21fe8ce1294fbc))
+
 ## [0.7.0](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-account-v0.6.0...restaurant-account-v0.7.0) (2024-02-06)
 
 

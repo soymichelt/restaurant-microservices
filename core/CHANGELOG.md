@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-core-v0.2.0...restaurant-core-v0.3.0) (2024-02-07)
+
+
+### Features
+
+* add lumigo config to core microservice ([181097d](https://github.com/soymichelt/restaurant-microservices/commit/181097da8f49fe6d09e511afcd02ed69231c4538))
+
 ## [0.2.0](https://github.com/soymichelt/restaurant-microservices/compare/restaurant-core-v0.1.0...restaurant-core-v0.2.0) (2024-01-29)
 
 

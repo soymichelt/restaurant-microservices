@@ -5,10 +5,13 @@ package:
   individually: true
 
 plugins:
+  - serverless-lumigo
   - serverless-esbuild
   - serverless-offline
 
 custom:
+  lumigo:
+    token: ${ssm:/restaurant-warehouse/lumigo/LUMIGO_TOKEN}
   constants: ${file(./../env.yml):constants}
   localConstants: ${file(./env.yml):constants}
   environment: ${file(./../env.yml):${opt:stage}}

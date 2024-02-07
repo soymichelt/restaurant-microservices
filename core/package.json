@@ -44,6 +44,7 @@
     "serverless": "^3.36.0",
     "serverless-aws-documentation": "^1.1.0",
     "serverless-esbuild": "^1.48.5",
+    "serverless-lumigo": "^1.14.5",
     "serverless-offline": "^13.2.0",
     "serverless-reqvalidator-plugin": "^3.1.0",
     "ts-jest": "^29.1.1",

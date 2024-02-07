@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/soymichelt/restaurant-microservices/compare/warehouse-v0.7.1...warehouse-v0.8.0) (2024-02-07)
+
+
+### Features
+
+* add lumigo config to warehouse microservice ([3be9e13](https://github.com/soymichelt/restaurant-microservices/commit/3be9e13393b7d17ac2682fd799c2376d243596a5))
+
 ## [0.7.1](https://github.com/soymichelt/restaurant-microservices/compare/warehouse-v0.7.0...warehouse-v0.7.1) (2024-01-27)
 
 
